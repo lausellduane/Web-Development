@@ -1,0 +1,24 @@
+<table id="todo" style="width: 100%">
+  <thead>
+    <tr>
+      <th class="style98">Action</th>
+      <th class="style98">Who</th>
+      <th class="style98">Due</th>
+      <th class="style98">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in todop if item.TOPIC == 'p' %}
+    <tr>
+      <td class="style66">{{item.DESCRIPTION}}</td>
+      <td class="style66">{{item.DISPLAYNAME}}</td>
+      <td class="style66">{{item.COMPLETIONDATE}}</td>
+      <td class="style66">{{item.STATUS}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script>
+    console.log("Section: ", "{{ section }}");
+</script>

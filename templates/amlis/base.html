@@ -1,0 +1,2234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Topic</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.4.0/css/buttons.dataTables.min.css">
+  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
+  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
+  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css">
+  <style>
+  body {
+      position: relative;
+  }
+  ul.nav-pills {
+      top: 20px;
+      position: fixed;
+      font-size: 32px;
+  }
+  div.col-xl-9 div {
+      height: 500px;
+      font-size: 28px;
+  }
+
+  .header {color: #000;  background-color: #FFFFFF; border: 1px solid black;}
+  .metrics {color: #000;  background-color: #FFFFFF; border: 1px solid black;}
+  .todo {color: #000;  background-color: #FFFFFF; border: 1px solid black;}
+  .summary {color: #000;  background-color: #FFFFFF; border: 1px solid black;}
+
+  @media screen and (max-width: 810px) {
+    #header, #metrics, #todo, #summary  {
+        margin-left: 150px;
+    }
+  }
+
+  .wrapper{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    /*grid-gap: 1em;*/
+    grid-auto-rows: minmax(120px, auto);
+  }
+
+  .wrapper2{
+    display: grid;
+    grid-template-columns: 1fr;
+    /*grid-gap: 1em;*/
+    grid-auto-rows: minmax(120px, auto);
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+  .wrapper3{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    /*grid-gap: 1em;*/
+    grid-auto-rows: minmax(120px, auto);
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+  .wrapper4{
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr;
+    /*grid-gap: 1em;*/
+    grid-auto-rows: minmax(120px, auto);
+  }
+
+  .wrapper5{
+    /*display: grid;
+    grid-template-columns: repeat(14, 1fr);
+    grid-gap: 0.5em;
+    /*grid-auto-rows: minmax(25px, auto);*/
+    /*grid-template-rows: repeat(5, 1fr);*/*/
+    display: -webkit-flex; /* Safari */
+    -webkit-flex-wrap: wrap; /* Safari 6.1+ */
+    display: flex;
+    flex-wrap: wrap;
+    /*padding: 0px 12px 0px 12px;*/
+  }
+
+  /*.wrapper5 > div{
+    justify-self: center;
+    font-size: 10px;
+    border: 1px;
+    text-align: center;
+    vertical-align: middle;
+    justify-items: center;
+  }*/
+
+  .wrapper6{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1em;
+    grid-auto-rows: minmax(120px, auto);
+  }
+
+  .wrapper7{
+    display: grid;
+    grid-template-columns: 1fr 5fr 5fr;
+    grid-gap: 1em;
+    grid-auto-rows: minmax(120px, auto);
+  }
+
+.wrapper_wentwell {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: minmax(12px, auto);
+}
+
+.wrapper_wentwrong {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: minmax(12px, auto);
+}
+
+ .daycell{
+   /*justify-self: center;
+   font-size: 10px;
+   border: 1px !important;
+   border-color: black;
+   text-align: center;
+   vertical-align: middle;
+   justify-items: center;*/
+   background-color:white;
+   border-style: solid;
+   border-width: 1px;
+   font-size: small;
+   font-color: black;
+   line-height: 100%;
+   width:30px;
+   height:30px;
+   border-color:black;
+   text-align: center;
+   vertical-align: middle;
+   display:inline;
+   padding: 8px 0px 0px 0px;*/
+ }
+
+  .wrapper > div{
+    background: #eee;
+    /*padding: 1em;*/
+  }
+
+  .menu{
+    grid-column: 1 / 2;
+    grid-row: 1 / 6;
+  }
+
+  .nested{
+    display: grid;
+  }
+
+  .metric{
+    grid-area: UpperCaseLetter | 1 / 2 / 2 / 3;
+    text-align: center;
+    font-size: 58pt;
+    font-weight: bold;
+    /*grid-column: 2 / 3;*/
+    /*grid-row: 1 / 2;*/
+  }
+
+  .space16cols {
+    grid-column-start: 1;
+    grid-column-end: 15;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+
+.verticalspacer30px{
+  min-height:30px;
+}
+  .days{
+    grid-area: DaysGrid | 1 / 3 / 2 / 7;
+    /*grid-column: 3 / 6;
+    grid-row: 1 / 2;*/
+  }
+
+  .metricDays{
+    grid-area: DaysGrid | 1 / 2 / 2 / 7;
+    /*grid-column: 2 / 6;
+    grid-row: 1 / 2;*/
+  }
+
+  .red {
+    background: red
+  }
+
+  .green {
+    background: green
+  }
+  </style>
+</head>
+
+<!-- Add data-spy="scroll" to the element that should be used
+as the scrollable area (often this is the <body> element). -->
+
+
+<!-- Then add the data-target attribute with a value of the id or
+the class name of the navigation bar (.navbar).
+This is to make sure that the navbar is connected with the scrollable area. -->
+
+<body data-spy="scroll" data-target="#myScrollspy" data-offset="20">
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="wrapper">
+
+      <!--                    Nav Bar                   -->
+
+      <div class="box menu nested">
+        <nav  class="menu" id="myScrollspy">
+
+          <ul class="nav nav-pills nav-stacked">
+            {% for item in term -%}
+            <li class="active"><a href="/dash/{{ item.team }}/{{ item.year }}/{{ item.month }}">Home</a></li>
+            {% endfor -%}
+            <li class="active"><a href="#header">Header</a></li>
+            <li class="active"><a href="#metrics">Metrics</a></li>
+            <li class="active"><a href="#todo">ToDos</a></li>
+            <li class="active"><a href="#summary">Summary</a></li>
+
+            <!-- <li class="active"><button onclick="goBack()">Go Back</button></li> -->
+          </ul>
+        </nav>
+      </div>
+      <!--                    End Nav Bar                   -->
+
+      <!--                    Header                        -->
+
+      {% block header %}{% endblock %}
+
+      <!--                   End Header                   -->
+        <div id="metrics" class="metrics">
+          <!-- <h1>NCs/Cappas</h1> -->
+          <br>
+
+          <div class="col-xs-12">
+              <div class="panel panel-primary">
+                  <div class="panel-heading">
+                      <h3 class="panel-title">Metrics</h3>
+                  </div>
+
+                  <div class="panel-body">
+                      {% with messages = get_flashed_messages() %}
+                          {% if messages %}
+                          <ul>
+                          {% for message in messages %}
+                              <li>{{ message }} </li>
+                          {% endfor %}
+                          </ul>
+                          {% endif %}
+                      {% endwith %}
+
+                      {% block metrics %}{% endblock %}
+
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div id="todo" class="todo">
+          {% block todos %}{% endblock %}
+        </div>
+        <div id="summary" class="summary">
+          <h1 style="text-align: center;">Weekly Summary</h1>
+          <br>
+          <div class="wrapper6">
+            <div class="wrapper7">
+                <div><h4>Week 1</h4></div>
+                <div>{% block week1well %}{% endblock %}</div>
+                <div>{% block week1wrong %}{% endblock %}</div>
+                <div><h4>Week 2</h4></div>
+                <div>{% block week2well %}{% endblock %}</div>
+                <div>{% block week2wrong %}{% endblock %}</div>
+                <div><h4>Week 3</h4></div>
+                <div>{% block week3well %}{% endblock %}</div>
+                <div>{% block week3wrong %}{% endblock %}</div>
+                <div><h4>Week 4</h4></div>
+                <div>{% block week4well %}{% endblock %}</div>
+                <div>{% block week4wrong %}{% endblock %}</div>
+                <div><h4>Week 5</h4></div>
+                <div>{% block week5well %}{% endblock %}</div>
+                <div>{% block week5wrong %}{% endblock %}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+{% block scriptAPI %}{% endblock %}
+<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.0/js/dataTables.buttons.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
+<script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
+<script src="//cdn.datatables.net/buttons/1.4.0/js/buttons.html5.min.js"></script>
+<script src="//cdn.datatables.net/buttons/1.4.0/js/buttons.print.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+
+// $(".daycell").on("click", function() {
+//     if $( "div.wrapper5" ).html(
+//       $(this).css("background", "red");
+//     );
+//     $(this).css("background", "red");
+// });
+
+// $(".daycell").on('click', function(e) {
+//
+//   // prevent <a> element from default action: taking to external url
+//   e.preventDefault();
+//   if ($(this).css("background-color") == "white") {
+//     $(this).css("background-color", "green");
+//   }
+//   else if ($(this).css("background-color") == "green") {
+//     $(this).css("background-color", "red");
+//   }
+//    else if ($(this).css("background-color") == "red"){
+//        $(this).css("background-color", "white");
+//    }
+
+    // if ($('.daycell').css("background-color", "green")){
+    //   $(this).css("background", "red");
+    // }
+    // else if ($('.daycell').css("background-color", "red")){
+    //   $(this).css("background", "white");
+    // }
+    // else {
+    //   $(this).css("background-color", "green")
+    // }
+
+
+    //  $(this).css("background", "red");
+// });
+// //////// HANDLERS /////////////
+// $(document).on('click', '.daycell', function(e) {
+//     // prevent <a> element from default action: taking to external url
+//     e.preventDefault();
+//     // get backgroud-color
+//     var daycell_style = $(this).find('div').attr('style');
+//     console.log("Daycell style": daycell_style);
+// });
+// /////////////////////////////////
+
+//////// Days HANDLERS /////////////
+
+// $(function () {
+//   var $days = $('#days');
+//   $.ajax({
+//     type: 'GET',
+//     url: '/api/days/{{ team }}/{{ year }}/{{ month }}/{{ topic }}',
+//     success: function(days) {
+//       $.each(days, function(i, day) {
+//         $days.append('<div class="daycell">80</div>');
+//         alert('Get succesful');
+//       });
+//     },
+//     error: function() {
+//       alert('Get unsuccesful');
+//     }
+//
+//   })
+// });
+
+
+function ChangeColor(day, color) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("PUT", '/api/days/{{ team }}/{{ year }}/{{ month }}/{{ topic }}/' + day + '/' + color, true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send();
+    var response = JSON.parse(xhttp.responseText);
+}
+
+
+
+$( "div.daycell" ).on( "click", function() {
+  var color = $( this ).css( "background-color");
+  var day = $( this ).html();
+  if (color == "rgb(255, 255, 255)") {
+    newcolor = "green"
+    color = $( this ).css( "background-color", newcolor );
+    ChangeColor(day, newcolor);
+  }
+  else if (color == "rgb(0, 128, 0)") {
+    newcolor = "red"
+    color = $( this ).css( "background-color", newcolor );
+    ChangeColor(day, newcolor);
+  }
+  else {
+    newcolor = "white"
+    color = $( this ).css( "background-color", newcolor );
+    ChangeColor(day, newcolor);
+  }
+
+  // $.ajax({
+  //   url: '/api/days/{{ team }}/{{ year }}/{{ month }}/{{ topic }}',
+  //   type: 'GET',
+  //   data: data,
+  //   dataType: "JSON",
+  //   success: function(data) {
+  //
+  //   }
+  // });
+  //
+  // $.ajax({
+  //   type: 'PUT',
+  //   url: '/api/days/{{ team }}/{{ year }}/{{ month }}/{{ topic }}',
+  //
+  // });
+});
+
+//////// Days HANDLERS /////////////
+
+function getFormattedDate(date) {
+  var year = date.getFullYear();
+  var month = (1 + date.getMonth()).toString();
+  month = month.length > 1 ? month : '0' + month;
+  var day = date.getDate().toString();
+  day = day.length > 1 ? day : '0' + day;
+  return month + '/' + day + '/' + year;
+}
+
+
+$(document).ready(function() {
+    $("#nc_cappa_is").DataTable({
+      dom: 'lBfrtip',
+      destroy: true,
+      buttons: [
+        {
+          extend: 'collection',
+          text: 'Export',
+          buttons: [
+              'copyHtml5',
+              {
+                extend: 'excelHtml5',
+                messageTop: 'The information in this table is extracted from Trackwise.'
+              },
+              'csvHtml5',
+              {
+                extend: 'pdfHtml5',
+                messageTop: 'The information in this table is extracted from Trackwise.'
+              },
+              'print'
+          ]
+        }
+      ]
+    });
+});
+
+
+
+$(document).on('click', '.child-table-nc', function(e) {
+    // prevent <a> element from default action: taking to external url
+    e.preventDefault();//this tell us don't take me to the url directly just
+    // proceed with the steps below
+    // get url
+    var child_url = $(this).find('a').attr('href');
+    $.ajax({
+        url: child_url,
+        success: function(data){
+            $("#child-table-nc-wrapper").html(data);
+            // initialize child datatable
+            $("#child-table-nc").DataTable({
+              //dom: 'Bfrtip',
+              dom: 't',
+              "scrollX": true,
+              buttons: [
+                {
+                  extend: 'collection',
+                  text: 'Export',
+                  buttons: [
+                      'copyHtml5',
+                      {
+                        extend: 'excelHtml5',
+                        messageTop: 'The information in this table is extracted from TrackWise.'
+                      },
+                      'csvHtml5',
+                      {
+                        extend: 'pdfHtml5',
+                        messageTop: 'The information in this table is extracted from TrackWise.'
+                      },
+                      'print'
+                  ]
+                }
+              ]
+            });
+        },
+        error: function(xhr, status, err) {
+            console.log(err);
+        }
+    });
+});
+
+
+
+$(document).ready(function() {
+  $("#incNearMiss").jsGrid({
+         width: "100%",
+         height: "auto",
+         data: [],
+         autoload: true,
+         inserting: true,
+         editing: true,
+         sorting: false,
+         paging: false,
+         headerRowRenderer: function() {
+           return `<thead>
+             <tr>
+               <th style="text-align:center">DATE</th>
+               <th style="text-align:center">DESCRIPTION</th>
+               <th style="text-align:center">OWNER</th>
+               <th style="text-align:center">ACTIONS</th>
+             </tr>
+           </thead>`;
+         },
+         fields: [
+             { name: "_id", type: "text", visible: false},
+             { name: "TEAM", type: "text", visible: false},
+             { name: "YEAR", type: "text", visible: false},
+             { name: "MONTH", type: "text", visible: false},
+             { name: "TOPIC", type: "text", visible: false},
+             { name: "#", type: "text", visible: false},
+             { name: "DATE", title: "DATE", type: "text", width: "25%", validate: "required", align:"center" },
+             { name: "DESCRIPTION" , title: "DESCRIPTION", type: "text", width: "25%", align:"center" },
+             { name: "OWNER" , title: "OWNER", type: "text", width: "25%", align:"center" },
+             { type: "control", deleteButton: true, width: "25%" }
+         ],
+         controller: {
+             loadData: function() {
+                 return $.ajax({
+                 type: "GET",
+                 url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/s/incNearMiss",
+                 dataType: "JSON"
+             })
+         },
+             updateItem: function(ManualItem) {
+                 return $.ajax({
+                 type: "PUT",
+                 url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/s/incNearMiss",
+                 data: ManualItem
+             });
+         },
+             deleteItem: function(ManualItem) {
+                 return $.ajax({
+                 type: "DELETE",
+                 url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/s/incNearMiss",
+                 data: ManualItem
+             });
+         },
+             insertItem: function(ManualItem) {
+                 return $.ajax({
+                 type: "POST",
+                 url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/s/incNearMiss",
+                 data: ManualItem
+             });
+         }
+     }
+     });
+ });
+
+ $(document).ready(function() {
+   $("#incFromSite").jsGrid({
+          width: "100%",
+          height: "auto",
+          data: [],
+          autoload: true,
+          inserting: false,
+          editing: true,
+          sorting: false,
+          paging: false,
+          headerRowRenderer: function() {
+            return `<thead>
+                      <tr>
+                        <th rowspan="2" style="text-align:center;vertical-align:middle;width:20%">Metric</th>
+                        <th colspan="2" style="text-align:center;width:14%">Week&nbsp;1</th>
+                        <th colspan="2" style="text-align:center;width:14%">Week&nbsp;2</th>
+                        <th colspan="2" style="text-align:center;width:14%">Week&nbsp;3</th>
+                        <th colspan="2" style="text-align:center;width:14%">Week&nbsp;4</th>
+                        <th colspan="2" style="text-align:center;width:14%">Week&nbsp;5</th>
+                        <th rowspan="2" style="text-align:center;width:10%">Action</th>
+                      </tr>
+                      <tr>
+                        <th style="text-align:center">Tue</th>
+                        <th style="text-align:center">Thu</th>
+                        <th style="text-align:center">Tue</th>
+                        <th style="text-align:center">Thu</th>
+                        <th style="text-align:center">Tue</th>
+                        <th style="text-align:center">Thu</th>
+                        <th style="text-align:center">Tue</th>
+                        <th style="text-align:center">Thu</th>
+                        <th style="text-align:center">Tue</th>
+                        <th style="text-align:center">Thu</th>
+                      </tr>
+                    </thead>`;
+          },
+          fields: [
+            { name: "_id", type: "text", visible: false},
+            { name: "TEAM", type: "text", visible: false},
+            { name: "YEAR", type: "text", visible: false},
+            { name: "MONTH", type: "text", visible: false},
+            { name: "TOPIC", type: "text", visible: false},
+            { name: "TABLE", type: "text", visible: false},
+            { name: "METRIC", type: "text", width: "20%", validate: "required" },
+            { name: "one" , title: "W1&nbsp;Tue", type: "number", width: "7%", align:"center" },
+            { name: "two" , title: "W1&nbsp;Thu", type: "number", width: "7%", align:"center" },
+            { name: "three" , title: "W2&nbsp;Tue", type: "number", width: "7%", align:"center" },
+            { name: "four" , title: "W2&nbsp;Thu", type: "number", width: "7%", align:"center" },
+            { name: "five" , title: "W3&nbsp;Tue", type: "number", width: "7%", align:"center" },
+            { name: "six" , title: "W3&nbsp;Thu", type: "number", width: "7%", align:"center" },
+            { name: "seven" , title: "W4&nbsp;Tue", type: "number", width: "7%", align:"center" },
+            { name: "eight" , title: "W4&nbsp;Thu", type: "number", width: "7%", align:"center" },
+            { name: "nine" , title: "W5&nbsp;Tue", type: "number", width: "7%", align:"center" },
+            { name: "ten", title: "W5&nbsp;Thu", type: "number", width: "7%", align:"center" },
+            { type: "control", deleteButton: false, width: "10%" }
+          ],
+          controller: {
+              loadData: function() {
+                  return $.ajax({
+                  type: "GET",
+                  url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/s/incFromSite",
+                  dataType: "JSON"
+              })
+          },
+              updateItem: function(ManualItem) {
+                  return $.ajax({
+                  type: "PUT",
+                  url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/s/incFromSite",
+                  data: ManualItem
+              });
+          },
+             deleteItem: $.noop,
+         //      deleteItem: function(item) {
+         //          return $.ajax({
+         //          type: "DELETE",
+         //          url: "/api/todos",
+         //          data: item
+         //      });
+         //  },
+              insertItem: function(ManualItem) {
+                  return $.ajax({
+                  type: "POST",
+                  url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/s/incFromSite",
+                  data: ManualItem
+              });
+          }
+      }
+      });
+  });
+
+$(document).ready(function() {
+  $("#training").jsGrid({
+         width: "100%",
+         height: "auto",
+         data: [],
+         autoload: true,
+         inserting: false,
+         editing: true,
+         sorting: false,
+         paging: false,
+         headerRowRenderer: function() {
+           return `<thead><tr>
+                 <th rowspan="2" style="text-align:center;vertical-align:middle;width:20%">Metric</th>
+                 <th colspan="2" style="text-align:center;width:14%">Week&nbsp;1</th>
+                 <th colspan="2" style="text-align:center;width:14%">Week&nbsp;2</th>
+                 <th colspan="2" style="text-align:center;width:14%">Week&nbsp;3</th>
+                 <th colspan="2" style="text-align:center;width:14%">Week&nbsp;4</th>
+                 <th colspan="2" style="text-align:center;width:14%">Week&nbsp;5</th>
+                 <th rowspan="2" style="text-align:center;width:10%">Action</th>
+               </tr>
+               <tr>
+                 <th style="text-align:center">Tue</th>
+                 <th style="text-align:center">Thu</th>
+                 <th style="text-align:center">Tue</th>
+                 <th style="text-align:center">Thu</th>
+                 <th style="text-align:center">Tue</th>
+                 <th style="text-align:center">Thu</th>
+                 <th style="text-align:center">Tue</th>
+                 <th style="text-align:center">Thu</th>
+                 <th style="text-align:center">Tue</th>
+                 <th style="text-align:center">Thu</th>
+               </tr>
+               </thead>`;
+         },
+         fields: [
+             { name: "_id", type: "text", visible: false},
+             { name: "TEAM", type: "text", visible: false},
+             { name: "YEAR", type: "text", visible: false},
+             { name: "MONTH", type: "text", visible: false},
+             { name: "TOPIC", type: "text", visible: false},
+             { name: "TABLE", type: "text", visible: false},
+             { name: "METRIC", type: "text", width: "20%", validate: "required" },
+             { name: "one" , title: "W1&nbsp;Tue", type: "number", width: "7%", align:"center" },
+             { name: "two" , title: "W1&nbsp;Thu", type: "number", width: "7%", align:"center" },
+             { name: "three" , title: "W2&nbsp;Tue", type: "number", width: "7%", align:"center" },
+             { name: "four" , title: "W2&nbsp;Thu", type: "number", width: "7%", align:"center" },
+             { name: "five" , title: "W3&nbsp;Tue", type: "number", width: "7%", align:"center" },
+             { name: "six" , title: "W3&nbsp;Thu", type: "number", width: "7%", align:"center" },
+             { name: "seven" , title: "W4&nbsp;Tue", type: "number", width: "7%", align:"center" },
+             { name: "eight" , title: "W4&nbsp;Thu", type: "number", width: "7%", align:"center" },
+             { name: "nine" , title: "W5&nbsp;Tue", type: "number", width: "7%", align:"center" },
+             { name: "ten", title: "W5&nbsp;Thu", type: "number", width: "7%", align:"center" },
+             { type: "control", deleteButton: false, width: "10%" }
+         ],
+         controller: {
+             loadData: function() {
+                 return $.ajax({
+                 type: "GET",
+                 url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/q/training",
+                 dataType: "JSON"
+             })
+         },
+             updateItem: function(ManualItem) {
+                 return $.ajax({
+                 type: "PUT",
+                 url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/q/training",
+                 data: ManualItem
+             });
+         },
+            deleteItem: $.noop,
+        //      deleteItem: function(item) {
+        //          return $.ajax({
+        //          type: "DELETE",
+        //          url: "/api/manual",
+        //          data: item
+        //      });
+        //  },
+             insertItem: function(ManualItem) {
+                 return $.ajax({
+                 type: "POST",
+                 url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/q/training",
+                 data: ManualItem
+             });
+         }
+     }
+     });
+ });
+
+ $(document).ready(function() {
+   $("#todos").jsGrid({
+          width: "100%",
+          height: "auto",
+          data: [],
+          autoload: true,
+          inserting: true,
+          editing: true,
+          sorting: false,
+          paging: false,
+          headerRowRenderer: function() {
+            return `<thead>
+                <tr>
+                  <th style="text-align:center;width:20%">STARTDT</th>
+                  <th style="text-align:center;width:20%">DESCRIPTION</th>
+                  <th style="text-align:center;width:10%">TASKNAME</th>
+                  <th style="text-align:center;width:10%">DISPLAYNAME</th>
+                  <th style="text-align:center;width:20%">COMPDT</th>
+                  <th style="text-align:center;width:10%">STATUS</th>
+                  <th style="text-align:center;width:10%">ACTIONS</th>
+                </tr>
+            </thead>`;
+          },
+          fields: [
+              { name: "_id", type: "text", visible: false},
+              { name: "TEAM", type: "text", visible: false},
+              { name: "YEAR", type: "text", visible: false},
+              { name: "MONTH", type: "text", visible: false},
+              { name: "TOPIC", type: "text", visible: false},
+              { name: "STARTDATE", title: "STARTDT", type: "text", width: "20%", validate: "required", align:"center" },
+              { name: "DESCRIPTION" , title: "DESCRIPTION", type: "text", width: "20%", align:"center" },
+              { name: "TASKNAME" , title: "TASKNAME", type: "text", width: "10%", align:"center" },
+              { name: "DISPLAYNAME" , title: "DISPLAYNAME", type: "text", width: "10%", align:"center" },
+              { name: "COMPLETIONDATE" , title: "COMPDT", type: "text", width: "20%", align:"center" },
+              { name: "STATUS" , title: "STATUS", type: "text", width: "10%", align:"center" },
+              { type: "control", deleteButton: true, width: "10%" }
+          ],
+          controller: {
+              loadData: function() {
+                  return $.ajax({
+                  type: "GET",
+                  url: "/api/todos/{{ team }}/{{ year }}/{{ month }}/{{ topic }}",
+                  dataType: "JSON"
+              })
+          },
+              updateItem: function(TodoItem) {
+                  return $.ajax({
+                  type: "PUT",
+                  url: "/api/todos/{{ team }}/{{ year }}/{{ month }}/{{ topic }}",
+                  data: TodoItem
+              });
+          },
+              deleteItem: function(TodoItem) {
+                  return $.ajax({
+                  type: "DELETE",
+                  url: "/api/todos/{{ team }}/{{ year }}/{{ month }}/{{ topic }}",
+                  data: TodoItem
+              });
+          },
+              insertItem: function(TodoItem) {
+                  return $.ajax({
+                  type: "POST",
+                  url: "/api/todos/{{ team }}/{{ year }}/{{ month }}/{{ topic }}",
+                  data: TodoItem
+              });
+          }
+      }
+      });
+  });
+
+$(document).ready(function() {
+  $("#periodic").jsGrid({
+       width: "100%",
+       height: "auto",
+       data: [],
+       autoload: true,
+       inserting: true,
+       editing: true,
+       sorting: false,
+       paging: false,
+       headerRowRenderer: function() {
+         return `<thead>
+           <tr>
+             <th rowspan="2" style="text-align:center;vertical-align:middle;width:15%">System Item</th>
+             <th rowspan="2" style="text-align:center;vertical-align:middle;width:15%">GMP<br />
+             Review</th>
+             <th colspan="2" style="text-align:center;width:20%">Security Review</th>
+             <th rowspan="2" style="text-align:center;vertical-align:middle;width:15%">Service<br />
+             Account</th>
+             <th rowspan="2" style="text-align:center;vertical-align:middle;width:15%">Due</th>
+             <th rowspan="2" style="text-align:center;vertical-align:middle;width:10%">Status</th>
+             <th rowspan="2" style="text-align:center;width:10%">Action</th>
+           </tr>
+           <tr>
+             <th style="text-align:center;width:10%">Non<br/>
+             Privileged</th>
+             <th style="text-align:center;width:10%">Privileged</th>
+           </tr>
+         </thead>`;
+       },
+       fields: [
+           { name: "_id", type: "text", visible: false},
+           { name: "TEAM", type: "text", visible: false},
+           { name: "YEAR", type: "text", visible: false},
+           { name: "MONTH", type: "text", visible: false},
+           { name: "TOPIC", type: "text", visible: false},
+           { name: "#", type: "text", visible: false},
+           { name: "SYSTEMITEM", title: "SYSTEM ITEM", type: "text", width: "15%", align:"center" },
+           { name: "GMPREVIEW" , title: "GMP REVIEW", type: "text", width: "15%", align:"center" },
+           { name: "NONPRIVILEGED" , title: "NON-PRIVILEGED", type: "text", width: "10%", align:"center" },
+           { name: "PRIVILEGED" , title: "PRIVILEGED", type: "text", width: "10%", align:"center" },
+           { name: "SERVICEACCOUNT" , title: "SERVICE ACCOUNT", type: "text", width: "15%", align:"center" },
+           { name: "DUE" , title: "DUE DATE", type: "text", width: "15%", align:"center" },
+           { name: "STATUS" , title: "STATUS", type: "text", width: "10%", align:"center" },
+           { type: "control", deleteButton: true, width: "10%" }
+       ],
+       controller: {
+           loadData: function() {
+               return $.ajax({
+               type: "GET",
+               url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/q/periodic",
+               dataType: "JSON"
+           })
+       },
+           updateItem: function(ManualItem) {
+               return $.ajax({
+               type: "PUT",
+               url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/q/periodic",
+               data: ManualItem
+           });
+       },
+          deleteItem: function(ManualItem) {
+               return $.ajax({
+               type: "DELETE",
+               url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/q/periodic",
+               data: ManualItem
+           });
+       },
+           insertItem: function(ManualItem) {
+               return $.ajax({
+               type: "POST",
+               url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/q/periodic",
+               data: ManualItem
+           });
+       }
+   }
+   });
+});
+
+$(document).ready(function() {
+  $("#taskIncidents").jsGrid({
+      width: "100%",
+      height: "auto",
+      data: [],
+      autoload: true,
+      inserting: false,
+      editing: true,
+      sorting: false,
+      paging: false,
+      headerRowRenderer: function() {
+        return `<thead><tr>
+              <th rowspan="2" style="text-align:center;vertical-align:middle;width:20%">Metric</th>
+              <th colspan="2" style="text-align:center;width:14%">Week&nbsp;1</th>
+              <th colspan="2" style="text-align:center;width:14%">Week&nbsp;2</th>
+              <th colspan="2" style="text-align:center;width:14%">Week&nbsp;3</th>
+              <th colspan="2" style="text-align:center;width:14%">Week&nbsp;4</th>
+              <th colspan="2" style="text-align:center;width:14%">Week&nbsp;5</th>
+              <th rowspan="2" style="text-align:center;width:10%">Action</th>
+            </tr>
+            <tr>
+              <th style="text-align:center">Tue</th>
+              <th style="text-align:center">Thu</th>
+              <th style="text-align:center">Tue</th>
+              <th style="text-align:center">Thu</th>
+              <th style="text-align:center">Tue</th>
+              <th style="text-align:center">Thu</th>
+              <th style="text-align:center">Tue</th>
+              <th style="text-align:center">Thu</th>
+              <th style="text-align:center">Tue</th>
+              <th style="text-align:center">Thu</th>
+            </tr>
+            </thead>`;
+      },
+      fields: [
+          { name: "_id", type: "text", visible: false},
+          { name: "TEAM", type: "text", visible: false},
+          { name: "YEAR", type: "text", visible: false},
+          { name: "MONTH", type: "text", visible: false},
+          { name: "TOPIC", type: "text", visible: false},
+          { name: "TABLE", type: "text", visible: false},
+          { name: "METRIC", type: "text", width: "20%", validate: "required" },
+          { name: "one" , title: "W1&nbsp;Tue", type: "number", width: "7%", align:"center" },
+          { name: "two" , title: "W1&nbsp;Thu", type: "number", width: "7%", align:"center" },
+          { name: "three" , title: "W2&nbsp;Tue", type: "number", width: "7%", align:"center" },
+          { name: "four" , title: "W2&nbsp;Thu", type: "number", width: "7%", align:"center" },
+          { name: "five" , title: "W3&nbsp;Tue", type: "number", width: "7%", align:"center" },
+          { name: "six" , title: "W3&nbsp;Thu", type: "number", width: "7%", align:"center" },
+          { name: "seven" , title: "W4&nbsp;Tue", type: "number", width: "7%", align:"center" },
+          { name: "eight" , title: "W4&nbsp;Thu", type: "number", width: "7%", align:"center" },
+          { name: "nine" , title: "W5&nbsp;Tue", type: "number", width: "7%", align:"center" },
+          { name: "ten", title: "W5&nbsp;Thu", type: "number", width: "7%", align:"center" },
+          { type: "control", deleteButton: false, width: "10%" }
+      ],
+      controller: {
+          loadData: function() {
+              return $.ajax({
+              type: "GET",
+              url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/d/taskIncidents",
+              dataType: "JSON"
+          })
+      },
+          updateItem: function(ManualItem) {
+              return $.ajax({
+              type: "PUT",
+              url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/d/taskIncidents",
+              data: ManualItem
+          });
+      },
+         deleteItem: $.noop,
+     //      deleteItem: function(item) {
+     //          return $.ajax({
+     //          type: "DELETE",
+     //          url: "/api/manual",
+     //          data: item
+     //      });
+     //  },
+          insertItem: function(ManualItem) {
+              return $.ajax({
+              type: "POST",
+              url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/d/taskIncidents",
+              data: ManualItem
+          });
+      }
+  }
+  });
+});
+
+$(document).ready(function() {
+  $("#ismStatus").jsGrid({
+       width: "100%",
+       height: "auto",
+       data: [],
+       autoload: true,
+       inserting: false,
+       editing: true,
+       sorting: false,
+       paging: false,
+       headerRowRenderer: function() {
+         return `<thead><tr>
+               <th rowspan="2" style="text-align:center;vertical-align:middle;width:20%">Metric</th>
+               <th colspan="2" style="text-align:center;width:14%">Week&nbsp;1</th>
+               <th colspan="2" style="text-align:center;width:14%">Week&nbsp;2</th>
+               <th colspan="2" style="text-align:center;width:14%">Week&nbsp;3</th>
+               <th colspan="2" style="text-align:center;width:14%">Week&nbsp;4</th>
+               <th colspan="2" style="text-align:center;width:14%">Week&nbsp;5</th>
+               <th rowspan="2" style="text-align:center;width:10%">Action</th>
+             </tr>
+             <tr>
+               <th style="text-align:center">Tue</th>
+               <th style="text-align:center">Thu</th>
+               <th style="text-align:center">Tue</th>
+               <th style="text-align:center">Thu</th>
+               <th style="text-align:center">Tue</th>
+               <th style="text-align:center">Thu</th>
+               <th style="text-align:center">Tue</th>
+               <th style="text-align:center">Thu</th>
+               <th style="text-align:center">Tue</th>
+               <th style="text-align:center">Thu</th>
+             </tr>
+             </thead>`;
+       },
+       fields: [
+           { name: "_id", type: "text", visible: false},
+           { name: "TEAM", type: "text", visible: false},
+           { name: "YEAR", type: "text", visible: false},
+           { name: "MONTH", type: "text", visible: false},
+           { name: "TOPIC", type: "text", visible: false},
+           { name: "TABLE", type: "text", visible: false},
+           { name: "METRIC", type: "text", width: "20%", validate: "required" },
+           { name: "one" , title: "W1&nbsp;Tue", type: "number", width: "7%", align:"center" },
+           { name: "two" , title: "W1&nbsp;Thu", type: "number", width: "7%", align:"center" },
+           { name: "three" , title: "W2&nbsp;Tue", type: "number", width: "7%", align:"center" },
+           { name: "four" , title: "W2&nbsp;Thu", type: "number", width: "7%", align:"center" },
+           { name: "five" , title: "W3&nbsp;Tue", type: "number", width: "7%", align:"center" },
+           { name: "six" , title: "W3&nbsp;Thu", type: "number", width: "7%", align:"center" },
+           { name: "seven" , title: "W4&nbsp;Tue", type: "number", width: "7%", align:"center" },
+           { name: "eight" , title: "W4&nbsp;Thu", type: "number", width: "7%", align:"center" },
+           { name: "nine" , title: "W5&nbsp;Tue", type: "number", width: "7%", align:"center" },
+           { name: "ten", title: "W5&nbsp;Thu", type: "number", width: "7%", align:"center" },
+           { type: "control", deleteButton: false, width: "10%" }
+       ],
+       controller: {
+           loadData: function() {
+               return $.ajax({
+               type: "GET",
+               url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/d/ismStatus",
+               dataType: "JSON"
+           })
+       },
+           updateItem: function(ManualItem) {
+               return $.ajax({
+               type: "PUT",
+               url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/d/ismStatus",
+               data: ManualItem
+           });
+       },
+          deleteItem: $.noop,
+      //      deleteItem: function(item) {
+      //          return $.ajax({
+      //          type: "DELETE",
+      //          url: "/api/manual",
+      //          data: item
+      //      });
+      //  },
+           insertItem: function(ManualItem) {
+               return $.ajax({
+               type: "POST",
+               url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/d/ismStatus",
+               data: ManualItem
+           });
+       }
+   }
+   });
+});
+
+$(document).ready(function() {
+  $("#systemAvailability").jsGrid({
+      width: "100%",
+      height: "auto",
+      data: [],
+      autoload: true,
+      inserting: false,
+      editing: true,
+      sorting: false,
+      paging: false,
+      headerRowRenderer: function() {
+        return `<thead><tr>
+              <th rowspan="2" style="text-align:center;vertical-align:middle;width:20%">Metric</th>
+              <th colspan="2" style="text-align:center;width:14%">Week&nbsp;1</th>
+              <th colspan="2" style="text-align:center;width:14%">Week&nbsp;2</th>
+              <th colspan="2" style="text-align:center;width:14%">Week&nbsp;3</th>
+              <th colspan="2" style="text-align:center;width:14%">Week&nbsp;4</th>
+              <th colspan="2" style="text-align:center;width:14%">Week&nbsp;5</th>
+              <th rowspan="2" style="text-align:center;width:10%">Action</th>
+            </tr>
+            <tr>
+              <th style="text-align:center">Tue</th>
+              <th style="text-align:center">Thu</th>
+              <th style="text-align:center">Tue</th>
+              <th style="text-align:center">Thu</th>
+              <th style="text-align:center">Tue</th>
+              <th style="text-align:center">Thu</th>
+              <th style="text-align:center">Tue</th>
+              <th style="text-align:center">Thu</th>
+              <th style="text-align:center">Tue</th>
+              <th style="text-align:center">Thu</th>
+            </tr>
+            </thead>`;
+      },
+      fields: [
+          { name: "_id", type: "text", visible: false},
+          { name: "TEAM", type: "text", visible: false},
+          { name: "YEAR", type: "text", visible: false},
+          { name: "MONTH", type: "text", visible: false},
+          { name: "TOPIC", type: "text", visible: false},
+          { name: "TABLE", type: "text", visible: false},
+          { name: "METRIC", type: "text", width: "20%", validate: "required" },
+          { name: "one" , title: "W1&nbsp;Tue", type: "number", width: "7%", align:"center" },
+          { name: "two" , title: "W1&nbsp;Thu", type: "number", width: "7%", align:"center" },
+          { name: "three" , title: "W2&nbsp;Tue", type: "number", width: "7%", align:"center" },
+          { name: "four" , title: "W2&nbsp;Thu", type: "number", width: "7%", align:"center" },
+          { name: "five" , title: "W3&nbsp;Tue", type: "number", width: "7%", align:"center" },
+          { name: "six" , title: "W3&nbsp;Thu", type: "number", width: "7%", align:"center" },
+          { name: "seven" , title: "W4&nbsp;Tue", type: "number", width: "7%", align:"center" },
+          { name: "eight" , title: "W4&nbsp;Thu", type: "number", width: "7%", align:"center" },
+          { name: "nine" , title: "W5&nbsp;Tue", type: "number", width: "7%", align:"center" },
+          { name: "ten", title: "W5&nbsp;Thu", type: "number", width: "7%", align:"center" },
+          { type: "control", deleteButton: false, width: "10%" }
+      ],
+      controller: {
+          loadData: function() {
+              return $.ajax({
+              type: "GET",
+              url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/i/systemAvailability",
+              dataType: "JSON"
+          })
+      },
+          updateItem: function(ManualItem) {
+              return $.ajax({
+              type: "PUT",
+              url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/i/systemAvailability",
+              data: ManualItem
+          });
+      },
+         deleteItem: $.noop,
+     //      deleteItem: function(item) {
+     //          return $.ajax({
+     //          type: "DELETE",
+     //          url: "/api/manual",
+     //          data: item
+     //      });
+     //  },
+          insertItem: function(ManualItem) {
+              return $.ajax({
+              type: "POST",
+              url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/i/systemAvailability",
+              data: ManualItem
+          });
+      }
+  }
+  });
+});
+
+$(document).ready(function() {
+  $("#tracking").jsGrid({
+         width: "100%",
+         height: "auto",
+         data: [],
+         autoload: true,
+         inserting: true,
+         editing: true,
+         sorting: false,
+         paging: false,
+         headerRowRenderer: function() {
+           return `<thead>
+             <tr>
+               <th style="text-align:center;width:20%">DATE OPEN</th>
+               <th style="text-align:center;width:15%">SYSTEM</th>
+               <th style="text-align:center;width:15%">PROBLEM</th>
+               <th style="text-align:center;width:20%">DUE + 30 DAYS</th>
+               <th style="text-align:center;width:10%">INVESTIGATOR</th>
+               <th style="text-align:center;width:10%">STATUS</th>
+               <th style="text-align:center;width:10%">ACTIONS</th>
+             </tr>
+           </thead>`;
+         },
+         fields: [
+             { name: "_id", type: "text", visible: false},
+             { name: "TEAM", type: "text", visible: false},
+             { name: "YEAR", type: "text", visible: false},
+             { name: "MONTH", type: "text", visible: false},
+             { name: "TOPIC", type: "text", visible: false},
+             { name: "DATEOPEN", title: "OPEN DATE", type: "text", width: "20%", validate: "required", align:"center"},
+             { name: "SYSTEM", title: "SYSTEM", type: "text", width: "15%", validate: "required", align:"center" },
+             { name: "PROBLEM" , title: "PROBLEM", type: "text", width: "15%", align:"center" },
+             { name: "DUEDATE" , title: "DUE DATE", type: "text", width: "20%", align:"center" },
+             { name: "PROBLEMINVESTIGATOR" , title: "Investigator", type: "text", width: "10%", align:"center" },
+             { name: "STATUS" , title: "STATUS", type: "text", width: "10%", align:"center" },
+             { type: "control", deleteButton: true, width: "10%" }
+         ],
+         controller: {
+             loadData: function() {
+                 return $.ajax({
+                 type: "GET",
+                 url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/p/tracking",
+                 dataType: "JSON"
+             })
+         },
+             updateItem: function(ManualItem) {
+                 return $.ajax({
+                 type: "PUT",
+                 url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/p/tracking",
+                 data: ManualItem
+             });
+         },
+             deleteItem: function(ManualItem) {
+                 return $.ajax({
+                 type: "DELETE",
+                 url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/p/tracking",
+                 data: ManualItem
+             });
+         },
+             insertItem: function(ManualItem) {
+                 return $.ajax({
+                 type: "POST",
+                 url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/p/tracking",
+                 data: ManualItem
+             });
+         }
+     }
+     });
+ });
+
+
+$(document).ready(function() {
+  $("#taskIncWos").jsGrid({
+        width: "100%",
+        height: "auto",
+        data: [],
+        autoload: true,
+        inserting: false,
+        editing: true,
+        sorting: false,
+        paging: false,
+        headerRowRenderer: function() {
+          return `<thead><tr>
+                <th rowspan="2" style="text-align:center;vertical-align:middle;width:40%">Metric</th>
+                <th colspan="2" style="text-align:center;width:12%">Week&nbsp;1</th>
+                <th colspan="2" style="text-align:center;width:12%">Week&nbsp;2</th>
+                <th colspan="2" style="text-align:center;width:12%">Week&nbsp;3</th>
+                <th colspan="2" style="text-align:center;width:12%">Week&nbsp;4</th>
+                <th colspan="2" style="text-align:center;width:12%">Week&nbsp;5</th>
+                <th rowspan="2" style="text-align:center;width:10%">Action</th>
+              </tr>
+              <tr>
+                <th style="text-align:center">Tue</th>
+                <th style="text-align:center">Thu</th>
+                <th style="text-align:center">Tue</th>
+                <th style="text-align:center">Thu</th>
+                <th style="text-align:center">Tue</th>
+                <th style="text-align:center">Thu</th>
+                <th style="text-align:center">Tue</th>
+                <th style="text-align:center">Thu</th>
+                <th style="text-align:center">Tue</th>
+                <th style="text-align:center">Thu</th>
+              </tr>
+              </thead>`;
+        },
+        fields: [
+            { name: "_id", type: "text", visible: false},
+            { name: "TEAM", type: "text", visible: false},
+            { name: "YEAR", type: "text", visible: false},
+            { name: "MONTH", type: "text", visible: false},
+            { name: "TOPIC", type: "text", visible: false},
+            { name: "TABLE", type: "text", visible: false},
+            { name: "METRIC", type: "text", width: "30%", validate: "required" },
+            { name: "one" , title: "W1&nbsp;Tue", type: "number", width: "7%", align:"center" },
+            { name: "two" , title: "W1&nbsp;Thu", type: "number", width: "7%", align:"center" },
+            { name: "three" , title: "W2&nbsp;Tue", type: "number", width: "7%", align:"center" },
+            { name: "four" , title: "W2&nbsp;Thu", type: "number", width: "7%", align:"center" },
+            { name: "five" , title: "W3&nbsp;Tue", type: "number", width: "7%", align:"center" },
+            { name: "six" , title: "W3&nbsp;Thu", type: "number", width: "7%", align:"center" },
+            { name: "seven" , title: "W4&nbsp;Tue", type: "number", width: "7%", align:"center" },
+            { name: "eight" , title: "W4&nbsp;Thu", type: "number", width: "7%", align:"center" },
+            { name: "nine" , title: "W5&nbsp;Tue", type: "number", width: "7%", align:"center" },
+            { name: "ten", title: "W5&nbsp;Thu", type: "number", width: "7%", align:"center" },
+            { type: "control", deleteButton: false, width: "10%" }
+        ],
+        controller: {
+            loadData: function() {
+                return $.ajax({
+                type: "GET",
+                url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/p/taskIncWos",
+                dataType: "JSON"
+            })
+        },
+            updateItem: function(ManualItem) {
+                return $.ajax({
+                type: "PUT",
+                url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/p/taskIncWos",
+                data: ManualItem
+            });
+        },
+           deleteItem: $.noop,
+       //      deleteItem: function(item) {
+       //          return $.ajax({
+       //          type: "DELETE",
+       //          url: "/api/manual",
+       //          data: item
+       //      });
+       //  },
+            insertItem: function(ManualItem) {
+                return $.ajax({
+                type: "POST",
+                url: "/api/manual/{{ team }}/{{ year }}/{{ month }}/p/taskIncWos",
+                data: ManualItem
+            });
+        }
+    }
+    });
+});
+
+$(document).ready(function() {
+  $("#week1well").jsGrid({
+         width: "100%",
+         height: "auto",
+         data: [],
+         autoload: true,
+         inserting: true,
+         editing: true,
+         sorting: false,
+         paging: false,
+         headerRowRenderer: function() {
+           return `  <thead>
+               <tr>
+                 <th style="text-align:center">What Went Well?</th>
+                 <th style="text-align:center">Actions</th>
+               </tr>
+             </thead>`;
+             // <th style="text-align:center">Week</th>
+             // <th style="text-align:center">HI_LO</th>
+         },
+         fields: [
+             { name: "_id", type: "text", visible: false},
+             { name: "TEAM", type: "text", visible: false},
+             { name: "YEAR", type: "text", visible: false},
+             { name: "MONTH", type: "text", visible: false},
+             { name: "WEEK", type: "text", visible: false, insertTemplate: function() { return $("<input>").attr("type", "text").attr("value", "one");}},
+             // { name: "WEEK", type: "text", visible: false },
+             { name: "HI_LO", type: "text", visible: false, insertTemplate: function() { return $("<input>").attr("type", "text").attr("value", "one");}},
+             // { name: "HI_LO", type: "text", visible: false},
+             { name: "NOTE", title: "What Went Well?", type: "text", width: "90%", validate: "required", align:"center" },
+             { name: "TABLE", title: "TABLE", type: "text", align:"center", visible: false},
+             { type: "control", deleteButton: true, width: "10%" }
+         ],
+         controller: {
+             loadData: function() {
+                 return $.ajax({
+                 type: "GET",
+                 url: "/api/week/{{ team }}/{{ year }}/{{ month }}/one/one",
+                 dataType: "JSON"
+             })
+         },
+             updateItem: function(WeekItem) {
+                 return $.ajax({
+                 type: "PUT",
+                 url: "/api/week/{{ team }}/{{ year }}/{{ month }}/one/one",
+                 data: WeekItem
+             });
+         },
+             deleteItem: function(WeekItem) {
+                 return $.ajax({
+                 type: "DELETE",
+                 url: "/api/week/{{ team }}/{{ year }}/{{ month }}/one/one",
+                 data: WeekItem
+             });
+         },
+             insertItem: function(WeekItem) {
+                 return $.ajax({
+                 type: "POST",
+                 url: "/api/week/{{ team }}/{{ year }}/{{ month }}/one/one",
+                 data: WeekItem
+             });
+         }
+     }
+     });
+ });
+
+$(document).ready(function() {
+  $("#week1wrong").jsGrid({
+        width: "100%",
+        height: "auto",
+        data: [],
+        autoload: true,
+        inserting: true,
+        editing: true,
+        sorting: false,
+        paging: false,
+        headerRowRenderer: function() {
+          return `  <thead>
+              <tr>
+                <th style="text-align:center">What Went Wrong?</th>
+                <th style="text-align:center">Actions</th>
+              </tr>
+            </thead>`;
+            // <th style="text-align:center">Week</th>
+            // <th style="text-align:center">HI_LO</th>
+        },
+        fields: [
+            { name: "_id", type: "text", visible: false},
+            { name: "TEAM", type: "text", visible: false},
+            { name: "YEAR", type: "text", visible: false},
+            { name: "MONTH", type: "text", visible: false},
+            // { name: "WEEK", type: "text", visible: false},
+            { name: "WEEK", type: "text", visible: false, insertTemplate: function() { return $("<input>").attr("type", "text").attr("value", "one");}},
+            { name: "HI_LO", type: "text", visible: false, insertTemplate: function() { return $("<input>").attr("type", "text").attr("value", "zero");}},
+            // { name: "HI_LO", type: "text", visible: false},
+            { name: "NOTE", title: "What Went Wrong?", type: "text", width: "90%", validate: "required", align:"center" },
+            { name: "TABLE", title: "TABLE", type: "text", align:"center", visible: false},
+            { type: "control", deleteButton: true, width: "10%" }
+        ],
+        controller: {
+            loadData: function() {
+                return $.ajax({
+                type: "GET",
+                url: "/api/week/{{ team }}/{{ year }}/{{ month }}/one/zero",
+                dataType: "JSON"
+            })
+        },
+            updateItem: function(WeekItem) {
+                return $.ajax({
+                type: "PUT",
+                url: "/api/week/{{ team }}/{{ year }}/{{ month }}/one/zero",
+                data: WeekItem
+            });
+        },
+            deleteItem: function(WeekItem) {
+                return $.ajax({
+                type: "DELETE",
+                url: "/api/week/{{ team }}/{{ year }}/{{ month }}/one/zero",
+                data: WeekItem
+            });
+        },
+            insertItem: function(WeekItem) {
+                return $.ajax({
+                type: "POST",
+                url: "/api/week/{{ team }}/{{ year }}/{{ month }}/one/zero",
+                data: WeekItem
+            });
+        }
+    }
+    });
+});
+
+$(document).ready(function() {
+  $("#week2well").jsGrid({
+         width: "100%",
+         height: "auto",
+         data: [],
+         autoload: true,
+         inserting: true,
+         editing: true,
+         sorting: false,
+         paging: false,
+         headerRowRenderer: function() {
+           return `  <thead>
+               <tr>
+                 <th style="text-align:center">What Went Well?</th>
+                 <th style="text-align:center">Actions</th>
+               </tr>
+             </thead>`;
+             // <th style="text-align:center">Week</th>
+             // <th style="text-align:center">HI_LO</th>
+         },
+         fields: [
+             { name: "_id", type: "text", visible: false},
+             { name: "TEAM", type: "text", visible: false},
+             { name: "YEAR", type: "text", visible: false},
+             { name: "MONTH", type: "text", visible: false},
+             { name: "WEEK", type: "text", visible: false, insertTemplate: function() { return $("<input>").attr("type", "text").attr("value", "two");}},
+             // { name: "WEEK", type: "text", visible: false },
+             { name: "HI_LO", type: "text", visible: false, insertTemplate: function() { return $("<input>").attr("type", "text").attr("value", "one");}},
+             // { name: "HI_LO", type: "text", visible: false},
+             { name: "NOTE", title: "What Went Well?", type: "text", width: "90%", validate: "required", align:"center" },
+             { name: "TABLE", title: "TABLE", type: "text", align:"center", visible: false},
+             { type: "control", deleteButton: true, width: "10%" }
+         ],
+         controller: {
+             loadData: function() {
+                 return $.ajax({
+                 type: "GET",
+                 url: "/api/week/{{ team }}/{{ year }}/{{ month }}/two/one",
+                 dataType: "JSON"
+             })
+         },
+             updateItem: function(WeekItem) {
+                 return $.ajax({
+                 type: "PUT",
+                 url: "/api/week/{{ team }}/{{ year }}/{{ month }}/two/one",
+                 data: WeekItem
+             });
+         },
+             deleteItem: function(WeekItem) {
+                 return $.ajax({
+                 type: "DELETE",
+                 url: "/api/week/{{ team }}/{{ year }}/{{ month }}/two/one",
+                 data: WeekItem
+             });
+         },
+             insertItem: function(WeekItem) {
+                 return $.ajax({
+                 type: "POST",
+                 url: "/api/week/{{ team }}/{{ year }}/{{ month }}/two/one",
+                 data: WeekItem
+             });
+         }
+     }
+     });
+ });
+
+$(document).ready(function() {
+  $("#week2wrong").jsGrid({
+        width: "100%",
+        height: "auto",
+        data: [],
+        autoload: true,
+        inserting: true,
+        editing: true,
+        sorting: false,
+        paging: false,
+        headerRowRenderer: function() {
+          return `  <thead>
+              <tr>
+                <th style="text-align:center">What Went Wrong?</th>
+                <th style="text-align:center">Actions</th>
+              </tr>
+            </thead>`;
+            // <th style="text-align:center">Week</th>
+            // <th style="text-align:center">HI_LO</th>
+        },
+        fields: [
+            { name: "_id", type: "text", visible: false},
+            { name: "TEAM", type: "text", visible: false},
+            { name: "YEAR", type: "text", visible: false},
+            { name: "MONTH", type: "text", visible: false},
+            // { name: "WEEK", type: "text", visible: false},
+            { name: "WEEK", type: "text", visible: false, insertTemplate: function() { return $("<input>").attr("type", "text").attr("value", "two");}},
+            { name: "HI_LO", type: "text", visible: false, insertTemplate: function() { return $("<input>").attr("type", "text").attr("value", "zero");}},
+            // { name: "HI_LO", type: "text", visible: false},
+            { name: "NOTE", title: "What Went Wrong?", type: "text", width: "90%", validate: "required", align:"center" },
+            { name: "TABLE", title: "TABLE", type: "text", align:"center", visible: false},
+            { type: "control", deleteButton: true, width: "10%" }
+        ],
+        controller: {
+            loadData: function() {
+                return $.ajax({
+                type: "GET",
+                url: "/api/week/{{ team }}/{{ year }}/{{ month }}/two/zero",
+                dataType: "JSON"
+            })
+        },
+            updateItem: function(WeekItem) {
+                return $.ajax({
+                type: "PUT",
+                url: "/api/week/{{ team }}/{{ year }}/{{ month }}/two/zero",
+                data: WeekItem
+            });
+        },
+            deleteItem: function(WeekItem) {
+                return $.ajax({
+                type: "DELETE",
+                url: "/api/week/{{ team }}/{{ year }}/{{ month }}/two/zero",
+                data: WeekItem
+            });
+        },
+            insertItem: function(WeekItem) {
+                return $.ajax({
+                type: "POST",
+                url: "/api/week/{{ team }}/{{ year }}/{{ month }}/two/zero",
+                data: WeekItem
+            });
+        }
+    }
+    });
+});
+
+$(document).ready(function() {
+  $("#week3well").jsGrid({
+         width: "100%",
+         height: "auto",
+         data: [],
+         autoload: true,
+         inserting: true,
+         editing: true,
+         sorting: false,
+         paging: false,
+         headerRowRenderer: function() {
+           return `  <thead>
+               <tr>
+                 <th style="text-align:center">What Went Well?</th>
+                 <th style="text-align:center">Actions</th>
+               </tr>
+             </thead>`;
+             // <th style="text-align:center">Week</th>
+             // <th style="text-align:center">HI_LO</th>
+         },
+         fields: [
+             { name: "_id", type: "text", visible: false},
+             { name: "TEAM", type: "text", visible: false},
+             { name: "YEAR", type: "text", visible: false},
+             { name: "MONTH", type: "text", visible: false},
+             { name: "WEEK", type: "text", visible: false, insertTemplate: function() { return $("<input>").attr("type", "text").attr("value", "three");}},
+             // { name: "WEEK", type: "text", visible: false },
+             { name: "HI_LO", type: "text", visible: false, insertTemplate: function() { return $("<input>").attr("type", "text").attr("value", "one");}},
+             // { name: "HI_LO", type: "text", visible: false},
+             { name: "NOTE", title: "What Went Well?", type: "text", width: "90%", validate: "required", align:"center" },
+             { name: "TABLE", title: "TABLE", type: "text", align:"center", visible: false},
+             { type: "control", deleteButton: true, width: "10%" }
+         ],
+         controller: {
+             loadData: function() {
+                 return $.ajax({
+                 type: "GET",
+                 url: "/api/week/{{ team }}/{{ year }}/{{ month }}/three/one",
+                 dataType: "JSON"
+             })
+         },
+             updateItem: function(WeekItem) {
+                 return $.ajax({
+                 type: "PUT",
+                 url: "/api/week/{{ team }}/{{ year }}/{{ month }}/three/one",
+                 data: WeekItem
+             });
+         },
+             deleteItem: function(WeekItem) {
+                 return $.ajax({
+                 type: "DELETE",
+                 url: "/api/week/{{ team }}/{{ year }}/{{ month }}/three/one",
+                 data: WeekItem
+             });
+         },
+             insertItem: function(WeekItem) {
+                 return $.ajax({
+                 type: "POST",
+                 url: "/api/week/{{ team }}/{{ year }}/{{ month }}/three/one",
+                 data: WeekItem
+             });
+         }
+     }
+     });
+ });
+
+$(document).ready(function() {
+  $("#week3wrong").jsGrid({
+        width: "100%",
+        height: "auto",
+        data: [],
+        autoload: true,
+        inserting: true,
+        editing: true,
+        sorting: false,
+        paging: false,
+        headerRowRenderer: function() {
+          return `  <thead>
+              <tr>
+                <th style="text-align:center">What Went Wrong?</th>
+                <th style="text-align:center">Actions</th>
+              </tr>
+            </thead>`;
+            // <th style="text-align:center">Week</th>
+            // <th style="text-align:center">HI_LO</th>
+        },
+        fields: [
+            { name: "_id", type: "text", visible: false},
+            { name: "TEAM", type: "text", visible: false},
+            { name: "YEAR", type: "text", visible: false},
+            { name: "MONTH", type: "text", visible: false},
+            // { name: "WEEK", type: "text", visible: false},
+            { name: "WEEK", type: "text", visible: false, insertTemplate: function() { return $("<input>").attr("type", "text").attr("value", "three");}},
+            { name: "HI_LO", type: "text", visible: false, insertTemplate: function() { return $("<input>").attr("type", "text").attr("value", "zero");}},
+            // { name: "HI_LO", type: "text", visible: false},
+            { name: "NOTE", title: "What Went Wrong?", type: "text", width: "90%", validate: "required", align:"center" },
+            { name: "TABLE", title: "TABLE", type: "text", align:"center", visible: false},
+            { type: "control", deleteButton: true, width: "10%" }
+        ],
+        controller: {
+            loadData: function() {
+                return $.ajax({
+                type: "GET",
+                url: "/api/week/{{ team }}/{{ year }}/{{ month }}/three/zero",
+                dataType: "JSON"
+            })
+        },
+            updateItem: function(WeekItem) {
+                return $.ajax({
+                type: "PUT",
+                url: "/api/week/{{ team }}/{{ year }}/{{ month }}/three/zero",
+                data: WeekItem
+            });
+        },
+            deleteItem: function(WeekItem) {
+                return $.ajax({
+                type: "DELETE",
+                url: "/api/week/{{ team }}/{{ year }}/{{ month }}/three/zero",
+                data: WeekItem
+            });
+        },
+            insertItem: function(WeekItem) {
+                return $.ajax({
+                type: "POST",
+                url: "/api/week/{{ team }}/{{ year }}/{{ month }}/three/zero",
+                data: WeekItem
+            });
+        }
+    }
+    });
+});
+
+$(document).ready(function() {
+  $("#week4well").jsGrid({
+         width: "100%",
+         height: "auto",
+         data: [],
+         autoload: true,
+         inserting: true,
+         editing: true,
+         sorting: false,
+         paging: false,
+         headerRowRenderer: function() {
+           return `  <thead>
+               <tr>
+                 <th style="text-align:center">What Went Well?</th>
+                 <th style="text-align:center">Actions</th>
+               </tr>
+             </thead>`;
+             // <th style="text-align:center">Week</th>
+             // <th style="text-align:center">HI_LO</th>
+         },
+         fields: [
+             { name: "_id", type: "text", visible: false},
+             { name: "TEAM", type: "text", visible: false},
+             { name: "YEAR", type: "text", visible: false},
+             { name: "MONTH", type: "text", visible: false},
+             { name: "WEEK", type: "text", visible: false, insertTemplate: function() { return $("<input>").attr("type", "text").attr("value", "four");}},
+             // { name: "WEEK", type: "text", visible: false },
+             { name: "HI_LO", type: "text", visible: false, insertTemplate: function() { return $("<input>").attr("type", "text").attr("value", "one");}},
+             // { name: "HI_LO", type: "text", visible: false},
+             { name: "NOTE", title: "What Went Well?", type: "text", width: "90%", validate: "required", align:"center" },
+             { name: "TABLE", title: "TABLE", type: "text", align:"center", visible: false},
+             { type: "control", deleteButton: true, width: "10%" }
+         ],
+         controller: {
+             loadData: function() {
+                 return $.ajax({
+                 type: "GET",
+                 url: "/api/week/{{ team }}/{{ year }}/{{ month }}/four/one",
+                 dataType: "JSON"
+             })
+         },
+             updateItem: function(WeekItem) {
+                 return $.ajax({
+                 type: "PUT",
+                 url: "/api/week/{{ team }}/{{ year }}/{{ month }}/four/one",
+                 data: WeekItem
+             });
+         },
+             deleteItem: function(WeekItem) {
+                 return $.ajax({
+                 type: "DELETE",
+                 url: "/api/week/{{ team }}/{{ year }}/{{ month }}/four/one",
+                 data: WeekItem
+             });
+         },
+             insertItem: function(WeekItem) {
+                 return $.ajax({
+                 type: "POST",
+                 url: "/api/week/{{ team }}/{{ year }}/{{ month }}/four/one",
+                 data: WeekItem
+             });
+         }
+     }
+     });
+ });
+
+$(document).ready(function() {
+  $("#week4wrong").jsGrid({
+        width: "100%",
+        height: "auto",
+        data: [],
+        autoload: true,
+        inserting: true,
+        editing: true,
+        sorting: false,
+        paging: false,
+        headerRowRenderer: function() {
+          return `  <thead>
+              <tr>
+                <th style="text-align:center">What Went Wrong?</th>
+                <th style="text-align:center">Actions</th>
+              </tr>
+            </thead>`;
+            // <th style="text-align:center">Week</th>
+            // <th style="text-align:center">HI_LO</th>
+        },
+        fields: [
+            { name: "_id", type: "text", visible: false},
+            { name: "TEAM", type: "text", visible: false},
+            { name: "YEAR", type: "text", visible: false},
+            { name: "MONTH", type: "text", visible: false},
+            // { name: "WEEK", type: "text", visible: false},
+            { name: "WEEK", type: "text", visible: false, insertTemplate: function() { return $("<input>").attr("type", "text").attr("value", "four");}},
+            { name: "HI_LO", type: "text", visible: false, insertTemplate: function() { return $("<input>").attr("type", "text").attr("value", "zero");}},
+            // { name: "HI_LO", type: "text", visible: false},
+            { name: "NOTE", title: "What Went Wrong?", type: "text", width: "90%", validate: "required", align:"center" },
+            { name: "TABLE", title: "TABLE", type: "text", align:"center", visible: false},
+            { type: "control", deleteButton: true, width: "10%" }
+        ],
+        controller: {
+            loadData: function() {
+                return $.ajax({
+                type: "GET",
+                url: "/api/week/{{ team }}/{{ year }}/{{ month }}/four/zero",
+                dataType: "JSON"
+            })
+        },
+            updateItem: function(WeekItem) {
+                return $.ajax({
+                type: "PUT",
+                url: "/api/week/{{ team }}/{{ year }}/{{ month }}/four/zero",
+                data: WeekItem
+            });
+        },
+            deleteItem: function(WeekItem) {
+                return $.ajax({
+                type: "DELETE",
+                url: "/api/week/{{ team }}/{{ year }}/{{ month }}/four/zero",
+                data: WeekItem
+            });
+        },
+            insertItem: function(WeekItem) {
+                return $.ajax({
+                type: "POST",
+                url: "/api/week/{{ team }}/{{ year }}/{{ month }}/four/zero",
+                data: WeekItem
+            });
+        }
+    }
+    });
+});
+
+$(document).ready(function() {
+  $("#week5well").jsGrid({
+         width: "100%",
+         height: "auto",
+         data: [],
+         autoload: true,
+         inserting: true,
+         editing: true,
+         sorting: false,
+         paging: false,
+         headerRowRenderer: function() {
+           return `  <thead>
+               <tr>
+                 <th style="text-align:center">What Went Well?</th>
+                 <th style="text-align:center">Actions</th>
+               </tr>
+             </thead>`;
+             // <th style="text-align:center">Week</th>
+             // <th style="text-align:center">HI_LO</th>
+         },
+         fields: [
+             { name: "_id", type: "text", visible: false},
+             { name: "TEAM", type: "text", visible: false},
+             { name: "YEAR", type: "text", visible: false},
+             { name: "MONTH", type: "text", visible: false},
+             { name: "WEEK", type: "text", visible: false, insertTemplate: function() { return $("<input>").attr("type", "text").attr("value", "five");}},
+             // { name: "WEEK", type: "text", visible: false },
+             { name: "HI_LO", type: "text", visible: false, insertTemplate: function() { return $("<input>").attr("type", "text").attr("value", "one");}},
+             // { name: "HI_LO", type: "text", visible: false},
+             { name: "NOTE", title: "What Went Well?", type: "text", width: "90%", validate: "required", align:"center" },
+             { name: "TABLE", title: "TABLE", type: "text", align:"center", visible: false},
+             { type: "control", deleteButton: true, width: "10%" }
+         ],
+         controller: {
+             loadData: function() {
+                 return $.ajax({
+                 type: "GET",
+                 url: "/api/week/{{ team }}/{{ year }}/{{ month }}/five/one",
+                 dataType: "JSON"
+             })
+         },
+             updateItem: function(WeekItem) {
+                 return $.ajax({
+                 type: "PUT",
+                 url: "/api/week/{{ team }}/{{ year }}/{{ month }}/five/one",
+                 data: WeekItem
+             });
+         },
+             deleteItem: function(WeekItem) {
+                 return $.ajax({
+                 type: "DELETE",
+                 url: "/api/week/{{ team }}/{{ year }}/{{ month }}/five/one",
+                 data: WeekItem
+             });
+         },
+             insertItem: function(WeekItem) {
+                 return $.ajax({
+                 type: "POST",
+                 url: "/api/week/{{ team }}/{{ year }}/{{ month }}/five/one",
+                 data: WeekItem
+             });
+         }
+     }
+     });
+ });
+
+$(document).ready(function() {
+  $("#week5wrong").jsGrid({
+        width: "100%",
+        height: "auto",
+        data: [],
+        autoload: true,
+        inserting: true,
+        editing: true,
+        sorting: false,
+        paging: false,
+        headerRowRenderer: function() {
+          return `  <thead>
+              <tr>
+                  <th style="text-align:center">What Went Wrong?</th>
+                <th style="text-align:center">Actions</th>
+              </tr>
+            </thead>`;
+            // <th style="text-align:center">Week</th>
+            // <th style="text-align:center">HI_LO</th>
+        },
+        fields: [
+            { name: "_id", type: "text", visible: false},
+            { name: "TEAM", type: "text", visible: false},
+            { name: "YEAR", type: "text", visible: false},
+            { name: "MONTH", type: "text", visible: false},
+            // { name: "WEEK", type: "text", visible: false},
+            { name: "WEEK", type: "text", visible: false, insertTemplate: function() { return $("<input>").attr("type", "text").attr("value", "five");}},
+            { name: "HI_LO", type: "text", visible: false, insertTemplate: function() { return $("<input>").attr("type", "text").attr("value", "zero");}},
+            // { name: "HI_LO", type: "text", visible: false},
+            { name: "NOTE", title: "What Went Wrong?", type: "text", width: "90%", validate: "required", align:"center" },
+            { name: "TABLE", title: "TABLE", type: "text", align:"center", visible: false},
+            { type: "control", deleteButton: true, width: "10%" }
+        ],
+        controller: {
+            loadData: function() {
+                return $.ajax({
+                type: "GET",
+                url: "/api/week/{{ team }}/{{ year }}/{{ month }}/five/zero",
+                dataType: "JSON"
+            })
+        },
+            updateItem: function(WeekItem) {
+                return $.ajax({
+                type: "PUT",
+                url: "/api/week/{{ team }}/{{ year }}/{{ month }}/five/zero",
+                data: WeekItem
+            });
+        },
+            deleteItem: function(WeekItem) {
+                return $.ajax({
+                type: "DELETE",
+                url: "/api/week/{{ team }}/{{ year }}/{{ month }}/five/zero",
+                data: WeekItem
+            });
+        },
+            insertItem: function(WeekItem) {
+                return $.ajax({
+                type: "POST",
+                url: "/api/week/{{ team }}/{{ year }}/{{ month }}/five/zero",
+                data: WeekItem
+            });
+        }
+    }
+    });
+});
+
+$(document).ready(function() {
+  $("#attendance").jsGrid({
+         width: "100%",
+         height: "auto",
+         data: [],
+         autoload: true,
+         inserting: true,
+         editing: true,
+         sorting: false,
+         paging: false,
+         headerRowRenderer: function() {
+           return `  <thead>
+           <tr>
+            <th colspan="11" class="style99">Attendance Tracking Table</th>
+          </tr>
+          <tr>
+            <th class="style98" rowspan="2" style="width: 35%">Staff Name</th>
+            <th colspan="2" class="style67" style="width: 13%">W1</th>
+            <th colspan="2" class="style67" style="width: 13%">W2</th>
+            <th colspan="2" class="style67" style="width: 13%">W3</th>
+            <th colspan="2" class="style67" style="width: 13%">W4</th>
+            <th colspan="2" class="style97" style="width: 13%">W5</th>
+          </tr>
+          <tr>
+            <td class="style65">1</td>
+            <td class="style65">2</td>
+            <td class="style65">1</td>
+            <td class="style65">2</td>
+            <td class="style65">1</td>
+            <td class="style65">2</td>
+            <td class="style65">1</td>
+            <td class="style65">2</td>
+            <td class="style65">1</td>
+            <td class="style65">2</td>
+          </tr>
+             </thead>`;
+         },
+         fields: [
+             { name: "_id", type: "text", visible: false},
+             { name: "TEAM", type: "text", visible: false},
+             { name: "YEAR", type: "text", visible: false},
+             { name: "MONTH", type: "text", visible: false},
+             { name: "STAFF", type: "text", visible: true},
+             { name: "W1A", title: "TUE", type: "text", width: "6.5%", align:"center" },
+             { name: "W1B", title: "THUR", type: "text", width: "6.5%", align:"center" },
+             { name: "W2A", title: "TUE", type: "text", width: "6.5%", align:"center" },
+             { name: "W2B", title: "THUR", type: "text", width: "6.5%", align:"center" },
+             { name: "W3A", title: "TUE", type: "text", width: "6.5%", align:"center" },
+             { name: "W3B", title: "THUR", type: "text", width: "6.5%", align:"center" },
+             { name: "W4A", title: "TUE", type: "text", width: "6.5%", align:"center" },
+             { name: "W4B", title: "THUR", type: "text", width: "6.5%", align:"center" },
+             { name: "W5A", title: "TUE", type: "text", width: "6.5%", align:"center" },
+             { name: "W5B", title: "THUR", type: "text", width: "6.5%", align:"center" },
+             { type: "control", deleteButton: true, width: "10%" }
+         ],
+         controller: {
+             loadData: function() {
+                 return $.ajax({
+                 type: "GET",
+                 url: "/api/attend/{{ team }}/{{ year }}/{{ month }}",
+                 dataType: "JSON"
+             })
+         },
+             updateItem: function(AttendItem) {
+                 return $.ajax({
+                 type: "PUT",
+                 url: "/api/attend/{{ team }}/{{ year }}/{{ month }}",
+                 data: AttendItem
+             });
+         },
+             deleteItem: function(AttendItem) {
+                 return $.ajax({
+                 type: "DELETE",
+                 url: "/api/attend/{{ team }}/{{ year }}/{{ month }}",
+                 data: AttendItem
+             });
+         },
+             insertItem: function(AttendItem) {
+                 return $.ajax({
+                 type: "POST",
+                 url: "/api/attend/{{ team }}/{{ year }}/{{ month }}",
+                 data: AttendItem
+             });
+         }
+     }
+     });
+ });
+
+
+  var DateField = function(config) {
+    jsGrid.Field.call(this, config);
+};
+
+DateField.prototype = new jsGrid.Field({
+
+
+    itemTemplate: function(value) {
+        return getFormattedDate(new Date(value));
+    },
+
+
+    insertTemplate: function(value) {
+        return this._insertPicker = $("<input>").datepicker({ defaultDate: new Date() });
+    },
+
+    editTemplate: function(value) {
+        return this._editPicker = $("<input>").datepicker().datepicker("setDate", new Date(value));
+    },
+
+    insertValue: function() {
+        return this._insertPicker.datepicker("getDate").toISOString();
+    },
+
+    editValue: function() {
+        return this._editPicker.datepicker("getDate").toISOString();
+    },
+
+    filterValue: function() {
+        return {
+            from: this._fromPicker.datepicker("getDate"),
+            to: this._toPicker.datepicker("getDate")
+        };
+    }
+});
+
+jsGrid.fields.date = DateField;
+
+
+// $(document).ready(function() {
+//     $('#periodic').DataTable({
+//       dom: 't'
+//     });
+// });
+
+$(document).ready(function() {
+    $('table.week').DataTable({
+      dom: 't'
+    });
+});
+
+// $(document).ready(function() {
+//     $('#incNearMiss').DataTable({
+//       dom: 't'
+//     });
+// });
+
+// $(document).ready(function() {
+//     $('#incFromSite').DataTable({
+//       dom: 't'
+//     });
+// });
+
+// $(document).ready(function() {
+//     $('#taskIncidents').DataTable({
+//       dom: 't'
+//     });
+// });
+
+// $(document).ready(function() {
+//     $('#ismStatus').DataTable({
+//       dom: 't'
+//     });
+// });
+
+// $(document).ready(function() {
+//     $('#systemAvailability').DataTable({
+//       dom: 't'
+//     });
+// });
+
+// $(document).ready(function() {
+//     $('#tracking').DataTable({
+//       dom: 't'
+//     });
+// });
+
+// $(document).ready(function() {
+//     $('#taskIncWos').DataTable({
+//       dom: 't'
+//     });
+// });
+
+$(document).ready(function() {
+    //parentTable();
+    $("#wo").DataTable({
+      dom: 'lBfrtip',
+    buttons: [
+      {
+        extend: 'collection',
+        text: 'Export',
+        buttons: [
+            'copyHtml5',
+            {
+              extend: 'excelHtml5',
+              messageTop: 'The information in this table is extracted from Maximo.'
+            },
+            'csvHtml5',
+            {
+              extend: 'pdfHtml5',
+              messageTop: 'The information in this table is extracted from Maximo.'
+            },
+            'print'
+        ]
+      }
+    ]
+    });
+});
+
+$(document).on('click', '.child-table-wo', function(e) {
+    // prevent <a> element from default action: taking to external url
+    e.preventDefault();//this tell us don't take me to the url directly just
+    // proceed with the steps below
+    // get url
+    var child_url = $(this).find('a').attr('href');
+    $.ajax({
+        url: child_url,
+        success: function(data){
+            $("#child-table-wo-wrapper").html(data);
+            // initialize child datatable
+            $("#child-table-wo").DataTable({
+              //dom: 'Bfrtip',
+              dom: 't',
+              "scrollX": true,
+              buttons: [
+                {
+                  extend: 'collection',
+                  text: 'Export',
+                  buttons: [
+                      'copyHtml5',
+                      {
+                        extend: 'excelHtml5',
+                        messageTop: 'The information in this table is extracted from TrackWise.'
+                      },
+                      'csvHtml5',
+                      {
+                        extend: 'pdfHtml5',
+                        messageTop: 'The information in this table is extracted from TrackWise.'
+                      },
+                      'print'
+                  ]
+                }
+              ]
+            });
+        },
+        error: function(xhr, status, err) {
+            console.log(err);
+        }
+    });
+});
+
+</script>
+</html>

@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>IS WCT Board</title>
+	<link href="{{ url_for('static', filename='style.css') }}" rel=stylesheet type=text/css>
+	<link href='https://fonts.googleapis.com/css?family=Pragati Narrow' rel='stylesheet'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.js"></script>
+
+</head>
+
+<body>
+
+<table style="width: 1874px;margin-left: 4px;"  cellspacing="0" cellpadding="0" class="style111">
+	{% include "header.html" ignore missing %}
+	<tr>
+		<td style="width: 384px" class="style3">Culture</td>
+		<td style="width: 384px" class="style3">Quality</td>
+		<td style="width: 384px" class="style3">Speed</td>
+		<td style="width: 384px" class="style3">Supply</td>
+		<td style="width: 384px" class="style3">Supply/Culture</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="style2a"  >
+				{% for item in term -%}
+				<div class="style2"><a href="/dash/{{ item.team }}/{{ item.year }}/{{ item.month }}/s">S</a></div>
+				{% endfor -%}
+					<div>
+						<div class="style2b">
+    						{% for item in daydata if item.TOPIC == 's' -%}
+    						<div class="style65a" style="background-color:{{ item.VALUE }};" >{{ loop.index }}</div>
+   							{% endfor -%}
+						</div>
+					</div>
+			</div>
+		</td>
+		<td>
+			<div class="style2a"  >
+					{% for item in term -%}
+					<div class="style2"><a href="/dash/{{ item.team }}/{{ item.year }}/{{ item.month }}/q">Q</a></div>
+					{% endfor -%}
+					<div>
+						<div class="style2b">
+    						{% for item in daydata if item.TOPIC == 'q' -%}
+    						<div class="style65a" style="background-color:{{ item.VALUE }};" >{{ loop.index }}</div>
+   							{% endfor -%}
+						</div>
+					</div>
+			</div>
+		</td>
+		<td>
+			<div class="style2a"  >
+						{% for item in term -%}
+						<div class="style2"><a href="/dash/{{ item.team }}/{{ item.year }}/{{ item.month }}/d">D</a></div>
+						{% endfor -%}
+						<div class="style2b">
+    						{% for item in daydata if item.TOPIC == 'd' -%}
+    						<div class="style65a" style="background-color:{{ item.VALUE }};" >{{ loop.index }}</div>
+   							{% endfor -%}
+						</div>
+			</div>
+		</td>
+		<td>
+			<div class="style2a"  >
+						{% for item in term -%}
+						<div class="style2"><a href="/dash/{{ item.team }}/{{ item.year }}/{{ item.month }}/i">I</a></div>
+						{% endfor -%}
+						<div class="style2b">
+    						{% for item in daydata if item.TOPIC == 'i' -%}
+    						<div class="style65a" style="background-color:{{ item.VALUE }};" >{{ loop.index }}</div>
+   							{% endfor -%}
+						</div>
+			</div>
+		</td>
+		<td>
+			<div class="style2a"  >
+						{% for item in term -%}
+						<div class="style2"><a href="/dash/{{ item.team }}/{{ item.year }}/{{ item.month }}/p">P</a></div>
+						{% endfor -%}
+						<div class="style2b">
+    						{% for item in daydata if item.TOPIC == 'p' -%}
+    						<div class="style65a" style="background-color:{{ item.VALUE }};" >{{ loop.index }}</div>
+   							{% endfor -%}
+						</div>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="style5">&nbsp;</td>
+		<td class="style5">&nbsp;</td>
+		<td class="style5">&nbsp;</td>
+		<td class="style5">&nbsp;</td>
+		<td class="style5">&nbsp;</td>
+	</tr>
+	<tr>
+		<td valign="top" class="style15">
+			{% include "amlis/s/incNearMiss.html" %}
+		<div>
+		<br />
+		</div>
+		{% include "amlis/s/incFromSite.html" %}
+		<br />
+		</td>
+		<td valign="top" class="style15">
+		{% include "nccapa.html" %}
+		<div>
+		<br />
+		</div>
+		{% include "amlis/q/training.html" %}
+		<div class="style102">
+		<br />
+		</div>
+		{% include "amlis/q/periodic.html" %}
+		</td>
+		<td class="style15" valign="top">
+		{% include "amlis/d/taskIncidents.html" %}
+		<div class="style15">
+		<br />
+		<br />
+		</div>
+		{% include "amlis/d/ismStatus.html" %}
+		<div class="style15">
+		</div>
+		</td>
+		<td valign="top" class="style15">
+		{% include "amlis/i/systemAvailability.html" %}
+		<div class="style15">
+		<br />
+		</div>
+		</td>
+		<td valign="top" class="style15">
+		{% include "amlis/p/tracking.html" %}
+		<div>
+		<br />
+		</div>
+		{% include "amlis/p/taskIncWos.html" %}
+		<br />
+		{% include "maxwo.html" %}
+		</td>
+	</tr>
+	<tr style="vertical-align:top">
+		<td><br />
+		{% with section = 's' %}
+			{% include "amlis/s/todos.html" %}
+		{% endwith %}
+		<br />
+		</td>
+		<td><br />
+			{% with section = 'q' %}
+				{% include "amlis/q/todos.html" %}
+			{% endwith %}
+		<br />
+		</td>
+		<td><br />
+		{% with section = 'd' %}
+			{% include "amlis/d/todos.html" %}
+		{% endwith %}
+		<br />
+		</td>
+		<td><br />
+		{% with section = 'i' %}
+			{% include "amlis/i/todos.html" %}
+		{% endwith %}
+		<br />
+		</td>
+		<td><br />
+		{% with section = 'p' %}
+			{% include "amlis/p/todos.html" %}
+		{% endwith %}
+		<br />
+		</td>
+	</tr>
+</table>
+{% include "bottomline.html" ignore missing %}
+
+</body>
+
+<script>
+console.log("From Dash Section:", section);
+</script>
+
+</html>

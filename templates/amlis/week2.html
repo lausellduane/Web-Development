@@ -1,0 +1,25 @@
+<table id="week2" style="width: 100%">
+  <tr>
+    <td colspan="2" class="style103">Week 2 Highlights/Lowlights</td>
+  </tr>
+  <tr>
+    <td class="style103">What Went Well?</td>
+    <td class="style103">What Went Wrong?</td>
+  </tr>
+  <tr>
+    <td class="style65" style="vertical-align:top">
+      <div>
+        {% for item in weekdata if item.WEEK == 'two' and item.HI_LO == 'one' %}
+        <div class="weeklycell">{{item.NOTE}}</div>
+        {% endfor %}
+      </div>
+    </td>
+    <td class="style65">
+      <div>
+        {% for item in weekdata if item.WEEK == 'two' and item.HI_LO == 'zero' %}
+        <div class="weeklycell">{{item.NOTE}}</div>
+        {% endfor %}
+      </div>
+    </td>
+  </tr>
+</table>

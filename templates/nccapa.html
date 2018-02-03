@@ -1,0 +1,26 @@
+		<table style="width: 100%">
+			<tr>
+				<td class="style77" colspan="7">NC&#39;s - CAPAs Generated</td>
+			</tr>
+			<tr>
+				<td class="style70">#</td>
+				<td class="style69">TR</td>
+				<td class="style69">Type</td>
+				<td class="style69">Description</td>
+				<td class="style69">Responsible</td>
+				<td class="style69">Due Date</td>
+				<td class="style68">Status</td>
+			</tr>
+			{% for item in ncdata %}
+			<tr>
+				<td class="style65">{{ item.rowno }}</td>
+				<td class="style65">{{ item.tr_id }}</td>
+				<td class="style65">{{ item.type }}</td>
+				<td class="style65">{{ item.short_description }}</td>
+				<td class="style65">{{ item.owner }}</td>
+				<td class="style65">{{ item.target_due_date|shortdate}}</td>
+				<td class="style65">{{ item.tr_status}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+

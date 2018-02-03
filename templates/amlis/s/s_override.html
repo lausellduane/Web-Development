@@ -1,0 +1,341 @@
+{% extends "amlis/base.html" %}
+
+{% block header %}
+
+<div class="wrapper2">
+   <div id="header" class="box metricDays wrapper3">   <!--Note that scrollable elements must match the ID of the links inside the navbar's list items (<div id="section1"> matches <a href="#section1">). -->
+     <div class="box metric">S</div>
+     <div class="box days wrapper4">
+       <div></div>
+       <div>
+         <div class="verticalspacer30px"></div>
+         <div class="wrapper5">
+           {% for item in safety_data.days %}
+           <div id="days" class="daycell" style="background-color:{{ item.VALUE }};">{{ loop.index }}</div>
+           {% endfor -%}
+
+           <span id="result">&nbsp;</span>
+          
+         </div>
+       </div>
+     </div>
+  </div>
+  <script>
+    console.log("Days: ", "{{ safety_data.days|safe }}");
+  </script>
+{% endblock %}
+
+{% block metrics %}
+
+<h1>Incidents/Near Misses</h1>
+
+<br>
+
+<table id="incNearMiss" style="width: 100%">
+  <thead>
+    <tr>
+      <th style="text-align:center">#</th>
+      <th style="text-align:center">Date</th>
+      <th style="text-align:center">Incident Description</th>
+      <th style="text-align:center">Owner</th>
+    </tr>
+  </thead>
+  {% for item in safety_data.incNearMiss if item.TOPIC == 's' %}
+  <tr>
+    <td style="text-align:center">{{item.NUMBER}}</td>
+    <td style="text-align:center">{{item.DATE}}</td>
+    <td style="text-align:center">{{item.DESCRIPTION}}</td>
+    <td style="text-align:center">{{item.OWNER}}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<br>
+
+<h1>Incidents from Site</h1>
+
+<table id="incFromSite" style="width: 100%">
+  <thead>
+    <tr>
+      <th rowspan="2" style="text-align:center;vertical-align:middle">Metric</th>
+      <th colspan="2" style="text-align:center">Week&nbsp;1</th>
+      <th colspan="2" style="text-align:center">Week&nbsp;2</th>
+      <th colspan="2" style="text-align:center">Week&nbsp;3</th>
+      <th colspan="2" style="text-align:center">Week&nbsp;4</th>
+      <th colspan="2" style="text-align:center">Week&nbsp;5</th>
+    </tr>
+    <tr>
+      <th style="text-align:center">1A</th>
+      <th style="text-align:center">1B</th>
+      <th style="text-align:center">2A</th>
+      <th style="text-align:center">2B</th>
+      <th style="text-align:center">3A</th>
+      <th style="text-align:center">3B</th>
+      <th style="text-align:center">4A</th>
+      <th style="text-align:center">4B</th>
+      <th style="text-align:center">5A</th>
+      <th style="text-align:center">5B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Safety Info. Cascade</td>
+        {% for item in safety_data.incFromSite if item.WEEK == '1A' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</a></td>
+        {% endfor %}
+        {% for item in safety_data.incFromSite if item.WEEK == '1B' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in safety_data.incFromSite if item.WEEK == '2A' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in safety_data.incFromSite if item.WEEK == '2B' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in safety_data.incFromSite if item.WEEK == '3A' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in safety_data.incFromSite if item.WEEK == '3B' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in safety_data.incFromSite if item.WEEK == '4A' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in safety_data.incFromSite if item.WEEK == '4B' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in safety_data.incFromSite if item.WEEK == '5A' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in safety_data.incFromSite if item.WEEK == '5B' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+    </tr>
+
+</table>
+
+{% endblock %}
+
+{% block todos %}
+
+<h1>ToDos</h1>
+
+<br>
+
+<div id="todos"></div>
+
+<br>
+
+{% endblock %}
+
+{% block week1well %}
+
+<div id="week1well"></div>
+
+<!-- <table id="week1" class="week" style="width: 100%">
+  <thead>
+    <tr>
+      <th colspan="2" style="text-align:center">Week 1 Highlights/Lowlights</th>
+    </tr>
+    <tr>
+      <th style="text-align:center">What Went Well?</th>
+      <th style="text-align:center">What Went Wrong?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><div class="wrapper_wentwell">
+      {% for item in safety_data.weekly if item.week == '1' and item.hi_lo == '1' %}
+      <div style="text-align:center">{{item.note}}</div>
+      {% endfor %}
+    </div></td>
+  <td><div class="wrapper_wentwrong">
+      {% for item in safety_data.weekly if item.week == '1' and item.hi_lo == '0' %}
+      <div style="text-align:center">{{item.note}}</div>
+      {% endfor %}
+  </div></td>
+    </tr>
+  </tbody>
+</table> -->
+
+{% endblock %}
+
+{% block week1wrong %}
+
+<div id="week1wrong"></div>
+
+{% endblock %}
+
+{% block week2well %}
+
+<div id="week2well"></div>
+
+{% endblock %}
+
+{% block week2wrong %}
+
+<div id="week2wrong"></div>
+
+{% endblock %}
+
+{% block week3well %}
+
+<div id="week3well"></div>
+
+{% endblock %}
+
+{% block week3wrong %}
+
+<div id="week3wrong"></div>
+
+{% endblock %}
+
+{% block week4well %}
+
+<div id="week4well"></div>
+
+{% endblock %}
+
+{% block week4wrong %}
+
+<div id="week4wrong"></div>
+
+{% endblock %}
+
+{% block week5well %}
+
+<div id="week5well"></div>
+
+{% endblock %}
+
+{% block week5wrong %}
+
+<div id="week5wrong"></div>
+
+{% endblock %}
+
+{% block week2 %}
+
+<table id="week2" class="week" style="width: 100%">
+  <thead>
+    <tr>
+      <th colspan="2" style="text-align:center">Week 2 Highlights/Lowlights</th>
+    </tr>
+    <tr>
+      <th style="text-align:center">What Went Well?</th>
+      <th style="text-align:center">What Went Wrong?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><div class="wrapper_wentwell">
+      {% for item in safety_data.weekly if item.week == '2' and item.hi_lo == '1' %}
+      <div style="text-align:center">{{item.note}}</div>
+      {% endfor %}
+    </div></td>
+  <td><div class="wrapper_wentwrong">
+      {% for item in safety_data.weekly if item.week == '2' and item.hi_lo == '0' %}
+      <div style="text-align:center">{{item.note}}</div>
+      {% endfor %}
+  </div></td>
+    </tr>
+  </tbody>
+</table>
+
+{% endblock %}
+
+{% block week3 %}
+
+<table id="week3" class="week" style="width: 100%">
+  <thead>
+    <tr>
+      <th colspan="2" style="text-align:center">Week 3 Highlights/Lowlights</th>
+    </tr>
+    <tr>
+      <th style="text-align:center">What Went Well?</th>
+      <th style="text-align:center">What Went Wrong?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><div class="wrapper_wentwell">
+      {% for item in safety_data.weekly if item.week == '3' and item.hi_lo == '1' %}
+      <div style="text-align:center">{{item.note}}</div>
+      {% endfor %}
+    </div></td>
+  <td><div class="wrapper_wentwrong">
+      {% for item in safety_data.weekly if item.week == '3' and item.hi_lo == '0' %}
+      <div style="text-align:center">{{item.note}}</div>
+      {% endfor %}
+  </div></td>
+    </tr>
+  </tbody>
+</table>
+
+{% endblock %}
+
+{% block week4 %}
+
+<table id="week4" class="week" style="width: 100%">
+  <thead>
+    <tr>
+      <th colspan="2" style="text-align:center">Week 4 Highlights/Lowlights</th>
+    </tr>
+    <tr>
+      <th style="text-align:center">What Went Well?</th>
+      <th style="text-align:center">What Went Wrong?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><div class="wrapper_wentwell">
+      {% for item in safety_data.weekly if item.week == '4' and item.hi_lo == '1' %}
+      <div style="text-align:center">{{item.note}}</div>
+      {% endfor %}
+    </div></td>
+  <td><div class="wrapper_wentwrong">
+      {% for item in safety_data.weekly if item.week == '4' and item.hi_lo == '0' %}
+      <div style="text-align:center">{{item.note}}</div>
+      {% endfor %}
+  </div></td>
+    </tr>
+  </tbody>
+</table>
+
+{% endblock %}
+
+{% block week5 %}
+
+<table id="week5" class="week" style="width: 100%">
+  <thead>
+    <tr>
+      <th colspan="2" style="text-align:center">Week 5 Highlights/Lowlights</th>
+    </tr>
+    <tr>
+      <th style="text-align:center">What Went Well?</th>
+      <th style="text-align:center">What Went Wrong?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><div class="wrapper_wentwell">
+      {% for item in safety_data.weekly if item.week == '5' and item.hi_lo == '1' %}
+      <div style="text-align:center">{{item.note}}</div>
+      {% endfor %}
+    </div></td>
+  <td><div class="wrapper_wentwrong">
+      {% for item in safety_data.weekly if item.week == '5' and item.hi_lo == '0' %}
+      <div style="text-align:center">{{item.note}}</div>
+      {% endfor %}
+  </div></td>
+    </tr>
+  </tbody>
+</table>
+
+{% endblock %}
+
+{% block scriptAPI %}
+
+
+
+{% endblock %}

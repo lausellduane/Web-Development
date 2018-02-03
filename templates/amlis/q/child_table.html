@@ -1,0 +1,26 @@
+<table id="child-table-nc" class="table table-striped table-bordered table-sm table-responsive" style="font-size:100%">
+  <thead>
+    <tr>
+      <th>TR ID</th>
+      <th>SUBSYSTEM</th>
+      <th>OWNER</th>
+      <th>QA CONTACT</th>
+      <th>INITIATOR</th>
+      <th>INITIATED DATE</th>
+      <th>SHORT DESCRIPTION</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in nc_data %}
+    <tr>
+      <td>{{item.tr_id}}</td>
+      <td>{{item.sub_system}}</a></td>
+      <td>{{item.owner}}</td>
+      <td>{{item.qa_contact}}</td>
+      <td>{{item.initiator}}</td>
+      <td>{{item.initiated_date|shortdate}}</td>
+      <td>{{item.short_description}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

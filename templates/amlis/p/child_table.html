@@ -1,0 +1,43 @@
+<table id="child-table-wo" class="table table-striped table-bordered table-sm table-responsive" style="font-size:50%" width="100%">
+    <thead>
+        <tr>
+            <th>PERSONID</th>
+            <th>WONUM</th>
+            <th>STATUS</th>
+            <th>WORKTYPE</th>
+            <th>DESCRIPTION</th>
+            <th>ASSETNUM</th>
+            <th>LOCATION</th>
+            <th>LOCDESC</th>
+            <th>ACTSTART</th>
+            <th>ACTFINISH</th>
+            <th>TARGSTARTDATE</th>
+            <th>TARGCOMPDATE</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in wo_data %}
+        <tr>
+            <td>{{item.PERSONID}}</a></td>
+            <td>{{item.WONUM}}</td>
+            <td>{{item.STATUS}}</td>
+            <td>{{item.WORKTYPE}}</td>
+            <td>{{item.DESCRIPTION}}</td>
+            <td>{{item.ASSETNUM}}</td>
+            <td>{{item.LOCATION}}</td>
+            <td>{{item.LOCDESC}}</td>
+            <td>{{item.ACTSTART}}</td>
+            <td>{{item.ACTFINISH}}</td>
+            <td>{{item.TARGSTARTDATE}}</td>
+            <td  {% if item.TARGCOMPDATE > today %}
+                  class="success"
+              {% else %}
+                  class="danger"
+              {% endif %} >
+
+              {{item.TARGCOMPDATE}}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

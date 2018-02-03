@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Edit Attendance</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.4.0/css/buttons.dataTables.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css">
+    <style>
+
+      .wrapper1 {
+        display: grid;
+        grid-template-columns: 1fr 8fr 1fr;
+        grid-auto-rows: minmax(120px, auto);
+      }
+
+      .wrapper2{
+        display: grid;
+        grid-template-columns: 1fr;
+        /*grid-gap: 1em;*/
+        grid-auto-rows: minmax(120px, auto);
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+
+      ul.nav-pills {
+          top: 20px;
+          position: fixed;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="wrapper1">
+      <!--                    Nav Bar                   -->
+
+      <div class="box menu nested">
+        <nav  class="menu" id="myScrollspy">
+
+          <ul class="nav nav-pills nav-stacked">
+            {% for item in term -%}
+            <li><a href="/dash/{{ item.team }}/{{ item.year }}/{{ item.month }}">Home</a></li>
+            {% endfor -%}
+            <!-- <li class="active"><button onclick="goBack()">Go Back</button></li> -->
+          </ul>
+        </nav>
+      </div>
+      <!--                    End Nav Bar                   -->
+      <div class="wrapper2">
+        <div id="attendance"></div>
+      </div>
+      <div>&nbsp;</div>
+    </div>
+
+  </body>
+
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.4.0/js/dataTables.buttons.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
+  <script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
+  <script src="//cdn.datatables.net/buttons/1.4.0/js/buttons.html5.min.js"></script>
+  <script src="//cdn.datatables.net/buttons/1.4.0/js/buttons.print.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+  <script>
+
+  $(document).ready(function() {
+    $("#attendance").jsGrid({
+           width: "100%",
+           height: "auto",
+           data: [],
+           autoload: true,
+           inserting: true,
+           editing: true,
+           sorting: false,
+           paging: false,
+           headerRowRenderer: function() {
+             return `  <thead>
+             <tr>
+              <th colspan="11" class="style99" style="text-align:center">Attendance Tracking Table</th>
+            </tr>
+            <tr>
+              <th class="style98" rowspan="2" style="width: 35%;text-align:center">Staff Name</th>
+              <th colspan="2" class="style67" style="width: 13%;text-align:center">W1</th>
+              <th colspan="2" class="style67" style="width: 13%;text-align:center">W2</th>
+              <th colspan="2" class="style67" style="width: 13%;text-align:center">W3</th>
+              <th colspan="2" class="style67" style="width: 13%;text-align:center">W4</th>
+              <th colspan="2" class="style97" style="width: 13%;text-align:center">W5</th>
+            </tr>
+            <tr>
+              <th class="style65" style="text-align:center">TUE</th>
+              <th class="style65" style="text-align:center">THUR</th>
+              <th class="style65" style="text-align:center">TUE</th>
+              <th class="style65" style="text-align:center">THUR</th>
+              <th class="style65" style="text-align:center">TUE</th>
+              <th class="style65" style="text-align:center">THUR</th>
+              <th class="style65" style="text-align:center">TUE</th>
+              <th class="style65" style="text-align:center">THUR</th>
+              <th class="style65" style="text-align:center">TUE</th>
+              <th class="style65" style="text-align:center">THUR</th>
+            </tr>
+               </thead>`;
+           },
+           fields: [
+               { name: "_id", type: "text", visible: false},
+               { name: "TEAM", type: "text", visible: false},
+               { name: "YEAR", type: "text", visible: false},
+               { name: "MONTH", type: "text", visible: false},
+               { name: "STAFF", type: "text", visible: true},
+               { name: "W1A", title: "TUE", type: "text", width: "6.5%", validate: "required", align:"center" },
+               { name: "W1B", title: "THUR", type: "text", width: "6.5%", validate: "required", align:"center" },
+               { name: "W2A", title: "TUE", type: "text", width: "6.5%", validate: "required", align:"center" },
+               { name: "W2B", title: "THUR", type: "text", width: "6.5%", validate: "required", align:"center" },
+               { name: "W3A", title: "TUE", type: "text", width: "6.5%", validate: "required", align:"center" },
+               { name: "W3B", title: "THUR", type: "text", width: "6.5%", validate: "required", align:"center" },
+               { name: "W4A", title: "TUE", type: "text", width: "6.5%", validate: "required", align:"center" },
+               { name: "W4B", title: "THUR", type: "text", width: "6.5%", validate: "required", align:"center" },
+               { name: "W5A", title: "TUE", type: "text", width: "6.5%", validate: "required", align:"center" },
+               { name: "W5B", title: "THUR", type: "text", width: "6.5%", validate: "required", align:"center" },
+               { type: "control", deleteButton: true, width: "10%" }
+           ],
+           controller: {
+               loadData: function() {
+                   return $.ajax({
+                   type: "GET",
+                   url: "/api/attend/{{ team }}/{{ year }}/{{ month }}",
+                   dataType: "JSON"
+               })
+           },
+               updateItem: function(AttendItem) {
+                   return $.ajax({
+                   type: "PUT",
+                   url: "/api/attend/{{ team }}/{{ year }}/{{ month }}",
+                   data: AttendItem
+               });
+           },
+               deleteItem: function(AttendItem) {
+                   return $.ajax({
+                   type: "DELETE",
+                   url: "/api/attend/{{ team }}/{{ year }}/{{ month }}",
+                   data: AttendItem
+               });
+           },
+               insertItem: function(AttendItem) {
+                   return $.ajax({
+                   type: "POST",
+                   url: "/api/attend/{{ team }}/{{ year }}/{{ month }}",
+                   data: AttendItem
+               });
+           }
+       }
+       });
+   });
+
+  </script>
+</html>

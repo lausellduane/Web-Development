@@ -1,0 +1,88 @@
+<table style="width: 100%">
+  <tr>
+    <td colspan="12" class="style99">ISM Status</td>
+  </tr>
+  <tr>
+    <td colspan="2" class="style98">Metrics</td>
+    <td colspan="2" class="style36">Week 1</td>
+    <td colspan="2" class="style36">Week 2</td>
+    <td colspan="2" class="style36">Week 3</td>
+    <td colspan="2" class="style36">Week 4</td>
+    <td colspan="2" class="style36">Week 5</td>
+  </tr>
+  {% for item in manualdata.ismStatus if item.METRIC == 'ISM - IMP. PAST DUE' %}
+  <tr>
+    <td rowspan="4" class="style84">ISM</td>
+    <td class="style66">Imp. Past Due</td>
+    <td class="style66"><div>{{item.one}}</div></td>
+    <td class="style66"><div>{{item.two}}</div></td>
+    <td class="style66"><div>{{item.three}}</div></td>
+    <td class="style66"><div>{{item.four}}</div></td>
+    <td class="style66"><div>{{item.five}}</div></td>
+    <td class="style66"><div>{{item.six}}</div></td>
+    <td class="style66"><div>{{item.seven}}</div></td>
+    <td class="style66"><div>{{item.eight}}</div></td>
+    <td class="style66"><div>{{item.nine}}</div></td>
+    <td class="style66"><div>{{item.ten}}</div></td>
+  </tr>
+  {% endfor %}
+  {% for item in manualdata.ismStatus if item.METRIC == 'ISM - IMP. WEEK AHEAD' %}
+  <tr>
+    <td class="style66">Imp. Week Ahead</td>
+    <td class="style66"><div>{{item.one}}</div></td>
+    <td class="style66"><div>{{item.two}}</div></td>
+    <td class="style66"><div>{{item.three}}</div></td>
+    <td class="style66"><div>{{item.four}}</div></td>
+    <td class="style66"><div>{{item.five}}</div></td>
+    <td class="style66"><div>{{item.six}}</div></td>
+    <td class="style66"><div>{{item.seven}}</div></td>
+    <td class="style66"><div>{{item.eight}}</div></td>
+    <td class="style66"><div>{{item.nine}}</div></td>
+    <td class="style66"><div>{{item.ten}}</div></td>
+  </tr>
+  {% endfor %}
+  {% for item in manualdata.ismStatus if item.METRIC == 'ISM - DEPTMT. REVIEW' %}
+  <tr>
+    <td class="style66">Deptmt. Review</td>
+    <td class="style66"><div>{{item.one}}</div></td>
+    <td class="style66"><div>{{item.two}}</div></td>
+    <td class="style66"><div>{{item.three}}</div></td>
+    <td class="style66"><div>{{item.four}}</div></td>
+    <td class="style66"><div>{{item.five}}</div></td>
+    <td class="style66"><div>{{item.six}}</div></td>
+    <td class="style66"><div>{{item.seven}}</div></td>
+    <td class="style66"><div>{{item.eight}}</div></td>
+    <td class="style66"><div>{{item.nine}}</div></td>
+    <td class="style66"><div>{{item.ten}}</div></td>
+  </tr>
+  {% endfor %}
+  {% for item in manualdata.ismStatus if item.METRIC == 'ISM - CLOSURE PAST DUE' %}
+  <tr>
+    <!-- <td rowspan="2" class="style26">&nbsp;</td> -->
+    <td class="style66">Closure Past Due</td>
+    <td class="style66"><div>{{item.one}}</div></td>
+    <td class="style66"><div>{{item.two}}</div></td>
+    <td class="style66"><div>{{item.three}}</div></td>
+    <td class="style66"><div>{{item.four}}</div></td>
+    <td class="style66"><div>{{item.five}}</div></td>
+    <td class="style66"><div>{{item.six}}</div></td>
+    <td class="style66"><div>{{item.seven}}</div></td>
+    <td class="style66"><div>{{item.eight}}</div></td>
+    <td class="style66"><div>{{item.nine}}</div></td>
+    <td class="style66"><div>{{item.ten}}</div></td>
+  </tr>
+  {% endfor %}
+  <!-- <tr>
+    <td class="style66">&nbsp;</td>
+    <td class="style66">&nbsp;</td>
+    <td class="style66">&nbsp;</td>
+    <td class="style66">&nbsp;</td>
+    <td class="style66">&nbsp;</td>
+    <td class="style66">&nbsp;</td>
+    <td class="style66">&nbsp;</td>
+    <td class="style66">&nbsp;</td>
+    <td class="style66">&nbsp;</td>
+    <td class="style66">&nbsp;</td>
+    <td class="style78">&nbsp;</td>
+  </tr> -->
+</table>

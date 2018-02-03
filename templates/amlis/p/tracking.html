@@ -1,0 +1,23 @@
+<table style="width: 100%">
+  <tr>
+    <td class="style35" colspan="6">Tracking</td>
+  </tr>
+  <tr>
+    <td class="style36">Date Open</td>
+    <td class="style36">System</td>
+    <td class="style36">Problem</td>
+    <td class="style36">Due Date + 30 days</td>
+    <td class="style36">Problem Investigator</td>
+    <td class="style40">Status</td>
+  </tr>
+  {% for item in manualdata.tracking if item.TOPIC == 'p' %}
+  <tr>
+    <td class="style66">{{item.DATEOPEN}}</td>
+    <td class="style66">{{item.SYSTEM}}</td>
+    <td class="style66">{{item.PROBLEM}}</td>
+    <td class="style66">{{item.DUEDATE}}</td>
+    <td class="style66">{{item.PROBLEMINVESTIGATOR}}</td>
+    <td class="style66">{{item.STATUS}}</td>
+  </tr>
+  {% endfor %}
+</table>

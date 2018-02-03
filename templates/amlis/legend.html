@@ -1,0 +1,32 @@
+<table style="width: 100%" cellspacing="3" cellpadding="3" class="style111">
+	<tr>
+		<td valign="top" class="style6">
+		<table >
+			<tr>
+				<td colspan="2" class="style107">Legend</td>
+			</tr>
+			<tr>
+				<td class="style103a">Symbol</td>
+				<td class="style103a">Explanation</td>
+			</tr>
+    <tr>
+      <td class="style65"><img src= {{ url_for('static', filename = 'img/rect-0.svg') }} width="35px" height="35px"><br>Achieved Goal(Green)</td>
+      <td class="style65"><img src= {{ url_for('static', filename ="img/pie-0.svg" ) }} width="35px" height="35px"><br>No Progress</td>
+    </tr>
+    <tr>
+      <td class="style65"><img src= {{ url_for('static', filename ="img/rect-1.svg" ) }} width="35px" height="35px"><br>Missed Goal/Safety Accident(Red)</td>
+      <td class="style65"><img src= {{ url_for('static', filename ="img/pie-1.svg" ) }} width="35px" height="35px"><br>Under Investigation Open</td>
+    </tr>
+    <tr>
+      <td class="style65"><img src= {{ url_for('static', filename ="img/rect-2.svg" ) }} width="35px" height="35px"><br>Not in Current Month/Holiday</td>
+      <td class="style65"><img src= {{ url_for('static', filename ="img/pie-2.svg" ) }} width="35px" height="35px"><br>Identified Counter Measure in Progress 50%</td>
+    </tr>
+    <tr>
+      <td class="style65"><img src= {{ url_for('static', filename ="img/rect-3.svg" ) }} width="50px" height="35px"><br>Goal</td>
+      <td class="style65"><img src= {{ url_for('static', filename ="img/pie-3.svg"  ) }} width="35px" height="35px"><br>Counter Measure in-progress In Progress 75%</td>
+    </tr>
+    <tr>
+      <td class="style65"><img src= {{ url_for('static', filename ="img/rect-4.svg" ) }} width="50px" height="35px"><br>Actual</td>
+      <td class="style65"><img src= {{ url_for('static', filename ="img/pie-4.svg" ) }} width="35px" height="35px"><br>Counter Measure Implemented/Closed</td>
+    </tr>
+</table>

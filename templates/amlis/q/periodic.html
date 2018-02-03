@@ -1,0 +1,31 @@
+<table style="width: 100%">
+  <tr>
+    <td colspan="7" class="style99">Periodic Review</td>
+  </tr>
+  <tr>
+    <td rowspan="2" class="style98">System Item</td>
+    <td rowspan="2" class="style67">GMP<br />
+    Review</td>
+    <td colspan="2" class="style67">Security Review</td>
+    <td rowspan="2" class="style67">Service<br />
+    Account</td>
+    <td rowspan="2" class="style67">Due</td>
+    <td rowspan="2" class="style97">Status</td>
+  </tr>
+  <tr>
+    <td class="style67">Non<br/>
+    Privileged</td>
+    <td class="style67">Privileged</td>
+  </tr>
+  {% for item in manualdata.periodic if item.TOPIC == 'q' %}
+  <tr>
+    <td class="style66">{{item.SYSTEMITEM}}</td>
+    <td class="style66">{{item.GMPREVIEW}}</td>
+    <td class="style66">{{item.NONPRIVILEGED}}</td>
+    <td class="style66">{{item.PRIVILEGED}}</td>
+    <td class="style66">{{item.SERVICEACCOUNT}}</td>
+    <td class="style66">{{item.DUE}}</td>
+    <td class="style66">{{item.STATUS}}</td>
+  </tr>
+  {% endfor %}
+</table>

@@ -1,0 +1,17 @@
+<table style="width: 100%" class="style7" cellspacing="0">
+  <tr>
+    <td class="style99" colspan="4">Incidents/Near Misses</td>
+  </tr>
+  <tr>
+    <td class="style98">Date</td>
+    <td class="style98">Incident Description</td>
+    <td class="style98">Owner</td>
+  </tr>
+  {% for item in manualdata.incNearMiss if item.TOPIC == 's' %}
+  <tr>
+    <td class="style66">{{item.DATE}}</td>
+    <td class="style66">{{item.DESCRIPTION}}</td>
+    <td class="style66">{{item.OWNER}}</td>
+  </tr>
+  {% endfor %}
+</table>

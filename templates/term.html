@@ -1,0 +1,20 @@
+
+{% for item in term -%}
+
+{{item.team.upper()}}:{{item.year}}-{{item.month}}
+
+<div class="dropdown show">
+  <a class="btn btn-secondary dropdown-toggle" href="/dash/{{ item.team }}/{{ item.year }}/{{ item.month }}" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Choose Period
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="/dash/{{ item.team }}/2017/8">2017-08</a>
+    <a class="dropdown-item" href="/dash/{{ item.team }}/2017/6">2017-06</a>
+    <a class="dropdown-item" href="/dash/{{ item.team }}/2017/5">2017-05</a>
+    <a class="dropdown-item" href="{{referrer}}">Last Period</a>
+    <a class="dropdown-item" href="/dash/{{ item.team }}/2017/12">2017-12</a>
+  </div>
+</div>
+
+{% endfor -%}

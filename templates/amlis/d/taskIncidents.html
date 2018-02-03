@@ -1,0 +1,131 @@
+<table style="width: 100%">
+  <tr>
+    <td colspan="12" class="style77">Task/Incidents Open vs Closed on Time</td>
+  </tr>
+  <tr>
+    <td colspan="2" class="style70">Metrics</td>
+    <td colspan="2" class="style36"><span class="style87">
+    <span class="style90">Week<br />
+    </span></span>1</td>
+    <td colspan="2" class="style36"><span class="style87">
+    <span class="style90">Week<br />
+    </span></span>2</td>
+    <td colspan="2" class="style36"><span class="style87">
+    <span class="style90">Week<br />
+    </span></span>3</td>
+    <td colspan="2" class="style36"><span class="style87">
+    <span class="style90">Week<br />
+    </span></span>4</td>
+    <td colspan="2" class="style63"><span class="style87">
+    <span class="style90">Week<br />
+    </span></span>5</td>
+  </tr>
+  {% for item in manualdata.taskIncidents if item.METRIC == 'TASK - WEEK AHEAD' %}
+  <tr>
+    <td rowspan="2" class="style84">Task</td>
+    <td class="style66">Week Ahead</td>
+    <td class="style66"><div>{{item.one}}</div></td>
+    <td class="style66"><div>{{item.two}}</div></td>
+    <td class="style66"><div>{{item.three}}</div></td>
+    <td class="style66"><div>{{item.four}}</div></td>
+    <td class="style66"><div>{{item.five}}</div></td>
+    <td class="style66"><div>{{item.six}}</div></td>
+    <td class="style66"><div>{{item.seven}}</div></td>
+    <td class="style66"><div>{{item.eight}}</div></td>
+    <td class="style66"><div>{{item.nine}}</div></td>
+    <td class="style66"><div>{{item.ten}}</div></td>
+  </tr>
+  {% endfor %}
+  {% for item in manualdata.taskIncidents if item.METRIC == 'TASK - PAST DUE' %}
+  <tr>
+    <td class="style66">Past Due</td>
+    <td class="style66"><div>{{item.one}}</div></td>
+    <td class="style66"><div>{{item.two}}</div></td>
+    <td class="style66"><div>{{item.three}}</div></td>
+    <td class="style66"><div>{{item.four}}</div></td>
+    <td class="style66"><div>{{item.five}}</div></td>
+    <td class="style66"><div>{{item.six}}</div></td>
+    <td class="style66"><div>{{item.seven}}</div></td>
+    <td class="style66"><div>{{item.eight}}</div></td>
+    <td class="style66"><div>{{item.nine}}</div></td>
+    <td class="style66"><div>{{item.ten}}</div></td>
+  </tr>
+  {% endfor %}
+  {% for item in manualdata.taskIncidents if item.METRIC == 'INCIDENTS - WEEK AHEAD' %}
+  <tr>
+    <td rowspan="3" class="style84">Incidents</td>
+    <td class="style66">Week Ahead</td>
+    <td class="style66"><div>{{item.one}}</div></td>
+    <td class="style66"><div>{{item.two}}</div></td>
+    <td class="style66"><div>{{item.three}}</div></td>
+    <td class="style66"><div>{{item.four}}</div></td>
+    <td class="style66"><div>{{item.five}}</div></td>
+    <td class="style66"><div>{{item.six}}</div></td>
+    <td class="style66"><div>{{item.seven}}</div></td>
+    <td class="style66"><div>{{item.eight}}</div></td>
+    <td class="style66"><div>{{item.nine}}</div></td>
+    <td class="style66"><div>{{item.ten}}</div></td>
+  </tr>
+  {% endfor %}
+  {% for item in manualdata.taskIncidents if item.METRIC == 'INCIDENTS - PAST DUE' %}
+  <tr>
+    <td class="style66">Past Due</td>
+    <td class="style66"><div>{{item.one}}</div></td>
+    <td class="style66"><div>{{item.two}}</div></td>
+    <td class="style66"><div>{{item.three}}</div></td>
+    <td class="style66"><div>{{item.four}}</div></td>
+    <td class="style66"><div>{{item.five}}</div></td>
+    <td class="style66"><div>{{item.six}}</div></td>
+    <td class="style66"><div>{{item.seven}}</div></td>
+    <td class="style66"><div>{{item.eight}}</div></td>
+    <td class="style66"><div>{{item.nine}}</div></td>
+    <td class="style66"><div>{{item.ten}}</div></td>
+  </tr>
+  {% endfor %}
+  {% for item in manualdata.taskIncidents if item.METRIC == 'INCIDENTS - WAITING' %}
+  <tr>
+    <td class="style66">Waiting</td>
+    <td class="style66"><div>{{item.one}}</div></td>
+    <td class="style66"><div>{{item.two}}</div></td>
+    <td class="style66"><div>{{item.three}}</div></td>
+    <td class="style66"><div>{{item.four}}</div></td>
+    <td class="style66"><div>{{item.five}}</div></td>
+    <td class="style66"><div>{{item.six}}</div></td>
+    <td class="style66"><div>{{item.seven}}</div></td>
+    <td class="style66"><div>{{item.eight}}</div></td>
+    <td class="style66"><div>{{item.nine}}</div></td>
+    <td class="style66"><div>{{item.ten}}</div></td>
+  </tr>
+  {% endfor %}
+  {% for item in manualdata.taskIncidents if item.METRIC == 'WORK ORDERS - OPEN' %}
+  <tr>
+    <td rowspan="2" class="style84">Work Orders</td>
+    <td class="style66">Open</td>
+    <td class="style66"><div>{{item.one}}</div></td>
+    <td class="style66"><div>{{item.two}}</div></td>
+    <td class="style66"><div>{{item.three}}</div></td>
+    <td class="style66"><div>{{item.four}}</div></td>
+    <td class="style66"><div>{{item.five}}</div></td>
+    <td class="style66"><div>{{item.six}}</div></td>
+    <td class="style66"><div>{{item.seven}}</div></td>
+    <td class="style66"><div>{{item.eight}}</div></td>
+    <td class="style66"><div>{{item.nine}}</div></td>
+    <td class="style66"><div>{{item.ten}}</div></td>
+  </tr>
+  {% endfor %}
+  {% for item in manualdata.taskIncidents if item.METRIC == 'WORK ORDERS - PAST DUE' %}
+  <tr>
+    <td class="style66">Past Due</td>
+    <td class="style66"><div>{{item.one}}</div></td>
+    <td class="style66"><div>{{item.two}}</div></td>
+    <td class="style66"><div>{{item.three}}</div></td>
+    <td class="style66"><div>{{item.four}}</div></td>
+    <td class="style66"><div>{{item.five}}</div></td>
+    <td class="style66"><div>{{item.six}}</div></td>
+    <td class="style66"><div>{{item.seven}}</div></td>
+    <td class="style66"><div>{{item.eight}}</div></td>
+    <td class="style66"><div>{{item.nine}}</div></td>
+    <td class="style66"><div>{{item.ten}}</div></td>
+  </tr>
+  {% endfor %}
+</table>

@@ -1,0 +1,38 @@
+<table style="width: 100%" cellspacing="0">
+  <tr>
+    <td colspan="11" class="style99">Incidents from Site (Cascade)</td>
+  </tr>
+  <tr>
+    <td class="style98">Metrics</td>
+    <td colspan="2" class="style58"><span class="style87">
+    <span class="style90">Week<br />
+    </span></span>1</td>
+    <td colspan="2" class="style58"><span class="style87">
+    <span class="style90">Week<br />
+    </span></span>2</td>
+    <td colspan="2" class="style58"><span class="style87">
+    <span class="style90">Week<br />
+    </span></span>3</td>
+    <td colspan="2" class="style58"><span class="style87">
+    <span class="style90">Week<br />
+    </span></span>4</td>
+    <td colspan="2" class="style59"><span class="style87">
+    <span class="style90">Week<br />
+    </span></span>5</td>
+  </tr>
+  {% for item in manualdata.incFromSite %}
+  <tr>
+    <td class="style73">Safety Info. Cascade&nbsp;</td>
+    <td class="style66"><div>{{item.one}}</div></td>
+    <td class="style66"><div>{{item.two}}</div></td>
+    <td class="style66"><div>{{item.three}}</div></td>
+    <td class="style66"><div>{{item.four}}</div></td>
+    <td class="style66"><div>{{item.five}}</div></td>
+    <td class="style66"><div>{{item.six}}</div></td>
+    <td class="style66"><div>{{item.seven}}</div></td>
+    <td class="style66"><div>{{item.eight}}</div></td>
+    <td class="style66"><div>{{item.nine}}</div></td>
+    <td class="style66"><div>{{item.ten}}</div></td>
+  </tr>
+  {% endfor %}
+</table>

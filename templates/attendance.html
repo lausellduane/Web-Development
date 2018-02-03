@@ -1,0 +1,49 @@
+		<table style="width: 100%;">
+			<tr>
+				<th colspan="11" class="style99">Attendance Tracking Table</th>
+			</tr>
+			<tr>
+				<th class="style98" rowspan="2" style="width: 35%">Staff Name</th>
+				<th colspan="2" class="style67" style="width: 13%">W1</th>
+				<th colspan="2" class="style67" style="width: 13%">W2</th>
+				<th colspan="2" class="style67" style="width: 13%">W3</th>
+				<th colspan="2" class="style67" style="width: 13%">W4</th>
+				<th colspan="2" class="style97" style="width: 13%">W5</th>
+			</tr>
+			<tr>
+				<td class="style65">1</td>
+				<td class="style65">2</td>
+				<td class="style65">1</td>
+				<td class="style65">2</td>
+				<td class="style65">1</td>
+				<td class="style65">2</td>
+				<td class="style65">1</td>
+				<td class="style65">2</td>
+				<td class="style65">1</td>
+				<td class="style65">2</td>
+			</tr>
+			{% for item in attendata %}
+			<tr>
+				<td class="style65">{{ item.STAFF }}</td>
+				<td class="style65">{{ item.W1A }}</td>
+				<td class="style65">{{ item.W1B }}</td>
+				<td class="style65">{{ item.W2A }}</td>
+				<td class="style65">{{ item.W2B }}</td>
+				<td class="style65">{{ item.W3A }}</td>
+				<td class="style65">{{ item.W3B }}</td>
+				<td class="style65">{{ item.W4A }}</td>
+				<td class="style65">{{ item.W4B }}</td>
+				<td class="style65">{{ item.W5A }}</td>
+				<td class="style65">{{ item.W5B }}</td>
+			</tr>
+			{% endfor %}
+			{% for item in term -%}
+			<tr>
+				<td colspan="11" class="style99"><a href="/dash/attendance/{{ item.team }}/{{ item.year }}/{{ item.month }}">Edit</a></td>
+			</tr>
+			{% endfor %}
+		</table>
+
+<script>
+console.log("From Attendance: ", {{ attendata|safe }})
+</script>

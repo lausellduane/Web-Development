@@ -1,0 +1,96 @@
+<table style="width: 100%" cellspacing="0">
+  <tr>
+    <td colspan="11" class="style99">Incidents from Site (Cascade)</td>
+  </tr>
+  <tr>
+    <td class="style98">Metrics</td>
+    <td colspan="2" class="style58"><span class="style87">
+    <span class="style90">Week<br />
+    </span></span>1</td>
+    <td colspan="2" class="style58"><span class="style87">
+    <span class="style90">Week<br />
+    </span></span>2</td>
+    <td colspan="2" class="style58"><span class="style87">
+    <span class="style90">Week<br />
+    </span></span>3</td>
+    <td colspan="2" class="style58"><span class="style87">
+    <span class="style90">Week<br />
+    </span></span>4</td>
+    <td colspan="2" class="style59"><span class="style87">
+    <span class="style90">Week<br />
+    </span></span>5</td>
+  </tr>
+  <tr>
+    <td class="style73">Safety Info. Cascade&nbsp;</td>
+    <td class="style66">
+      <div>
+      {% for item in manualdata.incFromSite if item.WEEK == '1A' %}
+      <div>{{item.VALUE}}</div>
+      {% endfor %}
+      </div>
+    </td>
+    <td class="style66">
+      <div>
+      {% for item in manualdata.incFromSite if item.WEEK == '1B' %}
+      <div class="weeklycell">{{item.VALUE}}</div>
+      {% endfor %}
+      </div>
+    </td>
+    <td class="style66">
+      <div>
+      {% for item in manualdata.incFromSite if item.WEEK == '2A' %}
+      <div>{{item.VALUE}}</div>
+      {% endfor %}
+      </div>
+    </td>
+    <td class="style66">
+      <div>
+      {% for item in manualdata.incFromSite if item.WEEK == '2B' %}
+      <div class="weeklycell">{{item.VALUE}}</div>
+      {% endfor %}
+      </div>
+    </td>
+    <td class="style66">
+      <div>
+      {% for item in manualdata.incFromSite if item.WEEK == '3A' %}
+      <div>{{item.VALUE}}</div>
+      {% endfor %}
+      </div>
+    </td>
+    <td class="style66">
+      <div>
+      {% for item in manualdata.incFromSite if item.WEEK == '3B' %}
+      <div class="weeklycell">{{item.VALUE}}</div>
+      {% endfor %}
+      </div>
+    </td>
+    <td class="style66">
+      <div>
+      {% for item in manualdata.incFromSite if item.WEEK == '4A' %}
+      <div>{{item.VALUE}}</div>
+      {% endfor %}
+      </div>
+    </td>
+    <td class="style66">
+      <div>
+      {% for item in manualdata.incFromSite if item.WEEK == '4B' %}
+      <div class="weeklycell">{{item.VALUE}}</div>
+      {% endfor %}
+      </div>
+    </td>
+    <td class="style66">
+      <div>
+      {% for item in manualdata.incFromSite if item.WEEK == '5A' %}
+      <div>{{item.VALUE}}</div>
+      {% endfor %}
+      </div>
+    </td>
+    <td class="style66">
+      <div>
+      {% for item in manualdata.incFromSite if item.WEEK == '5B' %}
+      <div class="weeklycell">{{item.VALUE}}</div>
+      {% endfor %}
+      </div>
+    </td>
+  </tr>
+</table>

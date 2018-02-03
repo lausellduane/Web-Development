@@ -1,0 +1,36 @@
+<!-- extend from main layout -->
+{% extends "amlis/main.html" %}
+
+{% block content %}
+<h1>Edit Record</h1>
+<form action="/edit_record/{{context.id}}" method="post" name="edit_form" class=".form-horizontal">
+    {{ context.form.hidden_tag() }}
+    <div class="form-group">
+      {{context.form.field_one.label}}
+      <!-- {{context.form.field_one(size=80)}} -->
+      {{context.form.field_one(size=80, value = context.costcenter )}}
+    </div>
+    <div class="form-group">
+      {{context.form.field_two.label}}
+      <!-- {{context.form.field_two(size=80)}} -->
+      {{context.form.field_two(size=80, value = context.personid )}}
+    </div>
+    <div class="form-group">
+      {{context.form.field_three.label}}
+      <!-- {{context.form.field_three(size=80)}} -->
+      {{context.form.field_three(size=80, value = context.displayname )}}
+    </div>
+    <div class="form-group">
+      {{context.form.field_four.label}}
+      <!-- {{context.form.field_four(size=80)}} -->
+      {{context.form.field_four(size=80, value = context.wo )}}
+    </div>
+    <div class="form-group">
+      <!-- {{context.form.field_id.label}} -->
+      <!-- {{context.form.field_id(size=80)}} -->
+      {{context.form.field_id(size=80, readonly=true, value = context.id )}}
+    </div>
+    <button type="reset" class="btn btn-default">Reset</button>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+{% endblock %}

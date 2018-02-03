@@ -1,0 +1,26 @@
+<table style="width: 100%">
+  <tr>
+    <td class="style77" colspan="7">Work Orders</td>
+  </tr>
+  <tr>
+    <td class="style70">#</td>
+    <td class="style69">Person ID</td>
+    <td class="style69">Cost Center</td>
+    <td class="style69">Display Name</td>
+    <td class="style69">Count</td>
+  </tr>
+  {% for item in wodata %}
+  <tr>
+    <td class="style65">{{ item.ROWNO }}</td>
+    <td class="style65">{{ item.PERSONID }}</td>
+    <td class="style65">{{ item.COSTCENTER }}</td>
+    <td class="style65">{{ item.DISPLAYNAME }}</td>
+    <td class="style65">{{ item.COUNT }}</td>
+  </tr>
+  {% endfor %}
+</table>
+  {% if womore %}
+  {% for item in term -%}
+  <div class="readmore"><a class="readmore" href="/dash/{{ item.team }}/{{ item.year }}/{{ item.month }}/p">More</a></div>
+  {% endfor %}
+  {% endif %}

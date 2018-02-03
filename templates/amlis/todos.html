@@ -1,0 +1,16 @@
+<table id="todo" style="width: 100%">
+  <tr>
+    <td class="style98">Action</td>
+    <td class="style98">Who</td>
+    <td class="style98">Due</td>
+    <td class="style98">Status</td>
+  </tr>
+  {% for item in tododata if item.TOPIC == section %}
+  <tr>
+    <td class="style65">{{item.DESCRIPTION}}</td>
+    <td class="style65">{{item.DISPLAYNAME}}</td>
+    <td class="style65">{{item.COMPLETIONDATE}}</td>
+    <td class="style65">{{item.STATUS}}</td>
+  </tr>
+  {% endfor %}
+</table>

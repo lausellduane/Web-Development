@@ -1,0 +1,629 @@
+{% extends "amlis/base.html" %}
+
+
+
+{% block header %}
+
+{% for item in productivity_data %}
+<script>
+  console.log({{ team }})
+</script>
+{% endfor %}
+<div class="wrapper2">
+   <div id="header" class="box metricDays wrapper3">   <!--Note that scrollable elements must match the ID of the links inside the navbar's list items (<div id="section1"> matches <a href="#section1">). -->
+     <div class="box metric">P</div>
+     <div class="box days wrapper4">
+       <div></div>
+       <div>
+         <div class="verticalspacer30px"></div>
+         <div class="wrapper5">
+           {% for item in productivity_data.days %}
+           <div id="days" class="daycell" style="background-color:{{ item.VALUE }};">{{ loop.index }}</div>
+           {% endfor -%}
+
+           <span id="result">&nbsp;</span>
+         </div>
+       </div>
+     </div>
+  </div>
+
+{% endblock %}
+
+{% block metrics %}
+
+<h1 style="text-align: center;">Tracking</h1>
+
+<br>
+
+<table id="tracking" style="width: 100%">
+  <thead>
+    <tr>
+      <th style="text-align:center">Date Open</th>
+      <th style="text-align:center">System</th>
+      <th style="text-align:center">Problem</th>
+      <th style="text-align:center">Due Date + 30 days</th>
+      <th style="text-align:center">Problem Investigator</th>
+      <th style="text-align:center">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in productivity_data.tracking if item.TOPIC == 'p' %}
+    <tr>
+      <td style="text-align:center">{{item.DATEOPEN}}</td>
+      <td style="text-align:center">{{item.SYSTEM}}</td>
+      <td style="text-align:center">{{item.PROBLEM}}</td>
+      <td style="text-align:center">{{item.DUEDATE}}</td>
+      <td style="text-align:center">{{item.PROBLEMINVESTIGATOR}}</td>
+      <td style="text-align:center">{{item.STATUS}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<br>
+
+<h1 style="text-align: center;">Task/Incidents/Work Orders (Last 7 days)</h1>
+
+<br>
+
+<table id="taskIncWos" style="width: 100%">
+  <thead>
+    <tr>
+      <th rowspan="2" style="text-align:center;vertical-align:middle">Metric</th>
+      <th colspan="2" style="text-align:center">Week&nbsp;1</th>
+      <th colspan="2" style="text-align:center">Week&nbsp;2</th>
+      <th colspan="2" style="text-align:center">Week&nbsp;3</th>
+      <th colspan="2" style="text-align:center">Week&nbsp;4</th>
+      <th colspan="2" style="text-align:center">Week&nbsp;5</th>
+    </tr>
+    <tr>
+      <th style="text-align:center">1A</th>
+      <th style="text-align:center">1B</th>
+      <th style="text-align:center">2A</th>
+      <th style="text-align:center">2B</th>
+      <th style="text-align:center">3A</th>
+      <th style="text-align:center">3B</th>
+      <th style="text-align:center">4A</th>
+      <th style="text-align:center">4B</th>
+      <th style="text-align:center">5A</th>
+      <th style="text-align:center">5B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      {% for item in productivity_data.taskIncWos if item.WEEK == '1A' and item.METRIC == 'TASKS - OPEN/INPROG/PENDING' %}
+      <td>{{item.METRIC}}</td>
+      {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '1A' and item.METRIC == 'TASKS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</a></td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '1B' and item.METRIC == 'TASKS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '2A' and item.METRIC == 'TASKS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '2B' and item.METRIC == 'TASKS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '3A' and item.METRIC == 'TASKS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '3B' and item.METRIC == 'TASKS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '4A' and item.METRIC == 'TASKS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '4B' and item.METRIC == 'TASKS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '5A' and item.METRIC == 'TASKS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '5B' and item.METRIC == 'TASKS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+      {% for item in productivity_data.taskIncWos if item.WEEK == '1A' and item.METRIC == 'TASKS - CLOSED/CANCELLED' %}
+      <td>{{item.METRIC}}</td>
+      {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '1A' and item.METRIC == 'TASKS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</a></td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '1B' and item.METRIC == 'TASKS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '2A' and item.METRIC == 'TASKS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '2B' and item.METRIC == 'TASKS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '3A' and item.METRIC == 'TASKS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '3B' and item.METRIC == 'TASKS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '4A' and item.METRIC == 'TASKS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '4B' and item.METRIC == 'TASKS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '5A' and item.METRIC == 'TASKS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '5B' and item.METRIC == 'TASKS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+      {% for item in productivity_data.taskIncWos if item.WEEK == '1A' and item.METRIC == 'INCIDENTS - OPEN/INPROG/PENDING' %}
+      <td>{{item.METRIC}}</td>
+      {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '1A' and item.METRIC == 'INCIDENTS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</a></td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '1B' and item.METRIC == 'INCIDENTS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '2A' and item.METRIC == 'INCIDENTS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '2B' and item.METRIC == 'INCIDENTS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '3A' and item.METRIC == 'INCIDENTS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '3B' and item.METRIC == 'INCIDENTS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '4A' and item.METRIC == 'INCIDENTS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '4B' and item.METRIC == 'INCIDENTS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '5A' and item.METRIC == 'INCIDENTS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '5B' and item.METRIC == 'INCIDENTS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+      {% for item in productivity_data.taskIncWos if item.WEEK == '1A' and item.METRIC == 'INCIDENTS - CLOSED/CANCELLED' %}
+      <td>{{item.METRIC}}</td>
+      {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '1A' and item.METRIC == 'INCIDENTS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</a></td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '1B' and item.METRIC == 'INCIDENTS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '2A' and item.METRIC == 'INCIDENTS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '2B' and item.METRIC == 'INCIDENTS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '3A' and item.METRIC == 'INCIDENTS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '3B' and item.METRIC == 'INCIDENTS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '4A' and item.METRIC == 'INCIDENTS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '4B' and item.METRIC == 'INCIDENTS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '5A' and item.METRIC == 'INCIDENTS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '5B' and item.METRIC == 'INCIDENTS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+      {% for item in productivity_data.taskIncWos if item.WEEK == '1A' and item.METRIC == 'WORK ORDERS - OPEN/INPROG/PENDING' %}
+      <td>{{item.METRIC}}</td>
+      {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '1A' and item.METRIC == 'WORK ORDERS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</a></td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '1B' and item.METRIC == 'WORK ORDERS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '2A' and item.METRIC == 'WORK ORDERS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '2B' and item.METRIC == 'WORK ORDERS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '3A' and item.METRIC == 'WORK ORDERS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '3B' and item.METRIC == 'WORK ORDERS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '4A' and item.METRIC == 'WORK ORDERS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '4B' and item.METRIC == 'WORK ORDERS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '5A' and item.METRIC == 'WORK ORDERS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '5B' and item.METRIC == 'WORK ORDERS - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+      {% for item in productivity_data.taskIncWos if item.WEEK == '1A' and item.METRIC == 'WORK ORDERS - CLOSED/CANCELLED' %}
+      <td>{{item.METRIC}}</td>
+      {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '1A' and item.METRIC == 'WORK ORDERS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</a></td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '1B' and item.METRIC == 'WORK ORDERS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '2A' and item.METRIC == 'WORK ORDERS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '2B' and item.METRIC == 'WORK ORDERS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '3A' and item.METRIC == 'WORK ORDERS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '3B' and item.METRIC == 'WORK ORDERS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '4A' and item.METRIC == 'WORK ORDERS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '4B' and item.METRIC == 'WORK ORDERS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '5A' and item.METRIC == 'WORK ORDERS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '5B' and item.METRIC == 'WORK ORDERS - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+      {% for item in productivity_data.taskIncWos if item.WEEK == '1A' and item.METRIC == 'ISM CHANGES - OPEN/INPROG/PENDING' %}
+      <td>{{item.METRIC}}</td>
+      {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '1A' and item.METRIC == 'ISM CHANGES - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</a></td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '1B' and item.METRIC == 'ISM CHANGES - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '2A' and item.METRIC == 'ISM CHANGES - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '2B' and item.METRIC == 'ISM CHANGES - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '3A' and item.METRIC == 'ISM CHANGES - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '3B' and item.METRIC == 'ISM CHANGES - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '4A' and item.METRIC == 'ISM CHANGES - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '4B' and item.METRIC == 'ISM CHANGES - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '5A' and item.METRIC == 'ISM CHANGES - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '5B' and item.METRIC == 'ISM CHANGES - OPEN/INPROG/PENDING' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+      {% for item in productivity_data.taskIncWos if item.WEEK == '1A' and item.METRIC == 'ISM CHANGES - CLOSED/CANCELLED' %}
+      <td>{{item.METRIC}}</td>
+      {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '1A' and item.METRIC == 'ISM CHANGES - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</a></td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '1B' and item.METRIC == 'ISM CHANGES - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '2A' and item.METRIC == 'ISM CHANGES - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '2B' and item.METRIC == 'ISM CHANGES - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '3A' and item.METRIC == 'ISM CHANGES - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '3B' and item.METRIC == 'ISM CHANGES - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '4A' and item.METRIC == 'ISM CHANGES - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '4B' and item.METRIC == 'ISM CHANGES - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '5A' and item.METRIC == 'ISM CHANGES - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+        {% for item in productivity_data.taskIncWos if item.WEEK == '5B' and item.METRIC == 'ISM CHANGES - CLOSED/CANCELLED' %}
+        <td style="text-align:center"><a href="/edit_record/{{item._id}}">{{item.VALUE}}</td>
+        {% endfor %}
+    </tr>
+</table>
+
+<br>
+
+<h1 style="text-align: center;">Work Orders</h1>
+
+<br>
+
+<table id="wo" width="100%">
+    <thead>
+        <tr>
+            <th style="display:none;">ID</th>
+            <th>COST CENTER</th>
+            <th>PERSON ID</th>
+            <th>NAME</th>
+            <th>WONUM</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in productivity_data.maxwo %}
+        <tr>
+            <td style="display:none;">{{item._id}}</td>
+            <td>{{item.COSTCENTER}}</td>
+            <td>{{item.PERSONID}}</td>
+            <td>{{item.DISPLAYNAME}}</td>
+            <td class="child-table-wo"><a href="/child_wo/wo/{{item.WONUM}}">{{item.WONUM}}</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<hr>
+
+<div id='child-table-wo-wrapper' class="pre-scrollable;"></div>
+
+{% endblock %}
+
+{% block todos %}
+
+<h1 style="text-align: center;">ToDos</h1>
+
+<br>
+
+<div id="todos"></div>
+
+<br>
+
+{% endblock %}
+
+{% block week1well %}
+
+<div id="week1well"></div>
+
+{% endblock %}
+
+{% block week1wrong %}
+
+<div id="week1wrong"></div>
+
+{% endblock %}
+
+{% block week2well %}
+
+<div id="week2well"></div>
+
+{% endblock %}
+
+{% block week2wrong %}
+
+<div id="week2wrong"></div>
+
+{% endblock %}
+
+{% block week3well %}
+
+<div id="week3well"></div>
+
+{% endblock %}
+
+{% block week3wrong %}
+
+<div id="week3wrong"></div>
+
+{% endblock %}
+
+{% block week4well %}
+
+<div id="week4well"></div>
+
+{% endblock %}
+
+{% block week4wrong %}
+
+<div id="week4wrong"></div>
+
+{% endblock %}
+
+{% block week5well %}
+
+<div id="week5well"></div>
+
+{% endblock %}
+
+{% block week5wrong %}
+
+<div id="week5wrong"></div>
+
+{% endblock %}
+
+{% block week1 %}
+
+<table id="week1" class="week" style="width: 100%">
+  <thead>
+    <tr>
+      <th colspan="2" style="text-align:center">Week 1 Highlights/Lowlights</th>
+    </tr>
+    <tr>
+      <th style="text-align:center">What Went Well?</th>
+      <th style="text-align:center">What Went Wrong?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><div class="wrapper_wentwell">
+      {% for item in productivity_data.weekly if item.week == '1' and item.hi_lo == '1' %}
+      <div style="text-align:center">{{item.note}}</div>
+      {% endfor %}
+    </div></td>
+  <td><div class="wrapper_wentwrong">
+      {% for item in productivity_data.weekly if item.week == '1' and item.hi_lo == '0' %}
+      <div style="text-align:center">{{item.note}}</div>
+      {% endfor %}
+  </div></td>
+    </tr>
+  </tbody>
+</table>
+
+{% endblock %}
+
+{% block week2 %}
+
+<table id="week2" class="week" style="width: 100%">
+  <thead>
+    <tr>
+      <th colspan="2" style="text-align:center">Week 2 Highlights/Lowlights</th>
+    </tr>
+    <tr>
+      <th style="text-align:center">What Went Well?</th>
+      <th style="text-align:center">What Went Wrong?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><div class="wrapper_wentwell">
+      {% for item in productivity_data.weekly if item.week == '2' and item.hi_lo == '1' %}
+      <div style="text-align:center">{{item.note}}</div>
+      {% endfor %}
+    </div></td>
+  <td><div class="wrapper_wentwrong">
+      {% for item in productivity_data.weekly if item.week == '2' and item.hi_lo == '0' %}
+      <div style="text-align:center">{{item.note}}</div>
+      {% endfor %}
+  </div></td>
+    </tr>
+  </tbody>
+</table>
+
+{% endblock %}
+
+{% block week3 %}
+
+<table id="week3" class="week" style="width: 100%">
+  <thead>
+    <tr>
+      <th colspan="2" style="text-align:center">Week 3 Highlights/Lowlights</th>
+    </tr>
+    <tr>
+      <th style="text-align:center">What Went Well?</th>
+      <th style="text-align:center">What Went Wrong?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><div class="wrapper_wentwell">
+      {% for item in productivity_data.weekly if item.week == '3' and item.hi_lo == '1' %}
+      <div style="text-align:center">{{item.note}}</div>
+      {% endfor %}
+    </div></td>
+  <td><div class="wrapper_wentwrong">
+      {% for item in productivity_data.weekly if item.week == '3' and item.hi_lo == '0' %}
+      <div style="text-align:center">{{item.note}}</div>
+      {% endfor %}
+  </div></td>
+    </tr>
+  </tbody>
+</table>
+
+{% endblock %}
+
+{% block week4 %}
+
+<table id="week4" class="week" style="width: 100%">
+  <thead>
+    <tr>
+      <th colspan="2" style="text-align:center">Week 4 Highlights/Lowlights</th>
+    </tr>
+    <tr>
+      <th style="text-align:center">What Went Well?</th>
+      <th style="text-align:center">What Went Wrong?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><div class="wrapper_wentwell">
+      {% for item in productivity_data.weekly if item.week == '4' and item.hi_lo == '1' %}
+      <div style="text-align:center">{{item.note}}</div>
+      {% endfor %}
+    </div></td>
+  <td><div class="wrapper_wentwrong">
+      {% for item in productivity_data.weekly if item.week == '4' and item.hi_lo == '0' %}
+      <div style="text-align:center">{{item.note}}</div>
+      {% endfor %}
+  </div></td>
+    </tr>
+  </tbody>
+</table>
+
+{% endblock %}
+
+{% block week5 %}
+
+<table id="week5" class="week" style="width: 100%">
+  <thead>
+    <tr>
+      <th colspan="2" style="text-align:center">Week 5 Highlights/Lowlights</th>
+    </tr>
+    <tr>
+      <th style="text-align:center">What Went Well?</th>
+      <th style="text-align:center">What Went Wrong?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><div class="wrapper_wentwell">
+      {% for item in productivity_data.weekly if item.week == '5' and item.hi_lo == '1' %}
+      <div style="text-align:center">{{item.note}}</div>
+      {% endfor %}
+    </div></td>
+  <td><div class="wrapper_wentwrong">
+      {% for item in productivity_data.weekly if item.week == '5' and item.hi_lo == '0' %}
+      <div style="text-align:center">{{item.note}}</div>
+      {% endfor %}
+  </div></td>
+    </tr>
+  </tbody>
+</table>
+
+{% endblock %}

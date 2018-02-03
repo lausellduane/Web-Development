@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <title>WCT</title>
+    <style >
+
+      body{
+        margin: 0;
+        padding: 0;
+        background: #fff;
+
+        color: #fff;
+        font-family: Arial;
+        font-size: 12px;
+      }
+
+      .body{
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        right: -40px;
+        bottom: -40px;
+        width: auto;
+        height: auto;
+        background-image: url({{ url_for('static', filename='img/BLUEBACKGROUNDAMG.jpg') }});
+        background-size: cover;
+        z-index: 0;
+      }
+
+      .container {
+        display: grid;
+        grid-template-columns: 1fr;
+        /*grid-gap: 1em;*/
+        grid-auto-rows: minmax(120px, auto);
+
+      }
+
+      h1 {
+                font: normal 80px courier !important;
+                text-align: center;
+      }
+
+      label {
+                font: normal 32px courier !important;
+      }
+
+      button {
+                font: normal 24px courier !important;
+      }
+
+      .font {
+                font: normal 24px courier !important;
+      }
+
+      .btn-green {background-color: #3cb371}
+
+      a:link {
+                color: #3cb371;
+      }
+
+      a:hover {
+                color: #f6c700;
+      }
+
+    </style>
+</head>
+
+<body>
+  <div class="body"></div>
+    <br>
+        {% block body %}{% endblock %}
+
+        <!-- <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script> -->
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

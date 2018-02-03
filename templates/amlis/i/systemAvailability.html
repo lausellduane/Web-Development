@@ -1,0 +1,151 @@
+<table style="width: 100%" class="style102">
+  <tr>
+    <td colspan="12" class="style35">System Availability</td>
+  </tr>
+  <tr>
+    <td colspan="2" class="style44">Metrics</td>
+    <td colspan="2" class="style36">Week<br />
+    1</td>
+    <td colspan="2" class="style36">Week<br />
+    2</td>
+    <td colspan="2" class="style36">Week 3</td>
+    <td colspan="2" class="style36">Week<br />
+    4</td>
+    <td colspan="2" class="style63">Week<br />
+    5</td>
+  </tr>
+  {% for item in manualdata.systemAvailability if item.METRIC == 'MES - MAJOR INCIDENTS' %}
+  <tr>
+    <td rowspan="4" class="vertical" valign="middle">MES</td>
+    <td class="style66">Major Incidents (Qty)</td>
+    <td class="style66"><div>{{item.one}}</div></td>
+    <td class="style66"><div>{{item.two}}</div></td>
+    <td class="style66"><div>{{item.three}}</div></td>
+    <td class="style66"><div>{{item.four}}</div></td>
+    <td class="style66"><div>{{item.five}}</div></td>
+    <td class="style66"><div>{{item.six}}</div></td>
+    <td class="style66"><div>{{item.seven}}</div></td>
+    <td class="style66"><div>{{item.eight}}</div></td>
+    <td class="style66"><div>{{item.nine}}</div></td>
+    <td class="style66"><div>{{item.ten}}</div></td>
+  </tr>
+  {% endfor %}
+  {% for item in manualdata.systemAvailability if item.METRIC == 'MES - DOWNTIME' %}
+  <tr>
+    <td class="style66">Downtime (hrs)</td>
+    <td class="style66"><div>{{item.one}}</div></td>
+    <td class="style66"><div>{{item.two}}</div></td>
+    <td class="style66"><div>{{item.three}}</div></td>
+    <td class="style66"><div>{{item.four}}</div></td>
+    <td class="style66"><div>{{item.five}}</div></td>
+    <td class="style66"><div>{{item.six}}</div></td>
+    <td class="style66"><div>{{item.seven}}</div></td>
+    <td class="style66"><div>{{item.eight}}</div></td>
+    <td class="style66"><div>{{item.nine}}</div></td>
+    <td class="style66"><div>{{item.ten}}</div></td>
+  </tr>
+  {% endfor %}
+  {% for item in manualdata.systemAvailability if item.METRIC == 'MES - TOTAL TIME' %}
+  <tr>
+    <td class="style66">Total Time</td>
+    <td colspan="2" class="style66"><div>{{item.one}}</div></td>
+    <td colspan="2" class="style66"><div>{{item.three}}</div></td>
+    <td colspan="2" class="style66"><div>{{item.five}}</div></td>
+    <td colspan="2" class="style66"><div>{{item.seven}}</div></td>
+    <td colspan="2" class="style66"><div>{{item.nine}}</div></td>
+  </tr>
+  {% endfor %}
+  {% for item in manualdata.systemAvailability if item.METRIC == 'MES - %' %}
+  <tr>
+    <td class="style66">%</td>
+    <td colspan="2" class="style66"><div>{{item.one}}</div></td>
+    <td colspan="2" class="style66"><div>{{item.three}}</div></td>
+    <td colspan="2" class="style66"><div>{{item.five}}</div></td>
+    <td colspan="2" class="style66"><div>{{item.seven}}</div></td>
+    <td colspan="2" class="style66"><div>{{item.nine}}</div></td>
+  </tr>
+  {% endfor %}
+  <!-- <tr>
+    <td class="style66">Total Time</td>
+    <td colspan="2" class="style66"></td>
+    <td colspan="2" class="style66"></td>
+    <td colspan="2" class="style66"></td>
+    <td colspan="2" class="style66"></td>
+    <td colspan="2" class="style66"></td>
+  </tr>
+  <tr>
+    <td class="style66">%</td>
+    <td colspan="2" class="style66"></td>
+    <td colspan="2" class="style66"></td>
+    <td colspan="2" class="style66"></td>
+    <td colspan="2" class="style66"></td>
+    <td colspan="2" class="style66"></td>
+  </tr> -->
+  {% for item in manualdata.systemAvailability if item.METRIC == 'PI - MAJOR INCIDENTS' %}
+  <tr>
+    <td rowspan="4" class="vertical">PI</td>
+    <td class="style66">Major Incidents (Qty)</td>
+    <td class="style66"><div>{{item.one}}</div></td>
+    <td class="style66"><div>{{item.two}}</div></td>
+    <td class="style66"><div>{{item.three}}</div></td>
+    <td class="style66"><div>{{item.four}}</div></td>
+    <td class="style66"><div>{{item.five}}</div></td>
+    <td class="style66"><div>{{item.six}}</div></td>
+    <td class="style66"><div>{{item.seven}}</div></td>
+    <td class="style66"><div>{{item.eight}}</div></td>
+    <td class="style66"><div>{{item.nine}}</div></td>
+    <td class="style66"><div>{{item.ten}}</div></td>
+  </tr>
+  {% endfor %}
+  {% for item in manualdata.systemAvailability if item.METRIC == 'PI - DOWNTIME' %}
+  <tr>
+    <td class="style66">Downtime (hrs)</td>
+    <td class="style66"><div>{{item.one}}</div></td>
+    <td class="style66"><div>{{item.two}}</div></td>
+    <td class="style66"><div>{{item.three}}</div></td>
+    <td class="style66"><div>{{item.four}}</div></td>
+    <td class="style66"><div>{{item.five}}</div></td>
+    <td class="style66"><div>{{item.six}}</div></td>
+    <td class="style66"><div>{{item.seven}}</div></td>
+    <td class="style66"><div>{{item.eight}}</div></td>
+    <td class="style66"><div>{{item.nine}}</div></td>
+    <td class="style66"><div>{{item.ten}}</div></td>
+  </tr>
+  {% endfor %}
+  {% for item in manualdata.systemAvailability if item.METRIC == 'PI - TOTAL TIME' %}
+  <tr>
+    <td class="style66">Total Time</td>
+    <td colspan="2" class="style66"><div>{{item.one}}</div></td>
+    <td colspan="2" class="style66"><div>{{item.three}}</div></td>
+    <td colspan="2" class="style66"><div>{{item.five}}</div></td>
+    <td colspan="2" class="style66"><div>{{item.seven}}</div></td>
+    <td colspan="2" class="style66"><div>{{item.nine}}</div></td>
+  </tr>
+  {% endfor %}
+  {% for item in manualdata.systemAvailability if item.METRIC == 'PI - %' %}
+  <tr>
+    <td class="style66">%</td>
+    <td colspan="2" class="style66"><div>{{item.one}}</div></td>
+    <td colspan="2" class="style66"><div>{{item.three}}</div></td>
+    <td colspan="2" class="style66"><div>{{item.five}}</div></td>
+    <td colspan="2" class="style66"><div>{{item.seven}}</div></td>
+    <td colspan="2" class="style66"><div>{{item.nine}}</div></td>
+  </tr>
+  {% endfor %}
+  <!-- <tr>
+    <td class="style66">Total Time</td>
+    <td colspan="2" class="style66"></td>
+    <td colspan="2" class="style66"></td>
+    <td colspan="2" class="style66"></td>
+    <td colspan="2" class="style66"></td>
+    <td colspan="2" class="style66"></td>
+  </tr>
+  <tr>
+    <td class="style64">%</td>
+    <td colspan="2" class="style66">&nbsp;</td>
+    <td colspan="2" class="style66">&nbsp;</td>
+    <td colspan="2" class="style66">&nbsp;</td>
+    <td colspan="2" class="style66">&nbsp;</td>
+    <td colspan="2" class="style66">&nbsp;</td>
+  </tr> -->
+</table>

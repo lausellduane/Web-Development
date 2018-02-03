@@ -1,0 +1,61 @@
+<table id="todo" style="width: 100%">
+  <tr>
+    <td class="style105">Action</td>
+    <td class="style105">Who</td>
+    <td class="style105">Due</td>
+    <td class="style105">Status</td>
+  </tr>
+  {% for item in tododata %}
+  <tr>
+    <td class="style102">{{item.DESCRIPTION}}</td>
+    <td class="style102">{{item.DISPLAYNAME}}</td>
+    <td class="style102">{{item.COMPLETIONDATE}}</td>
+    <td class="style102">{{item.STATUS}}</td>
+  </tr>
+  {% endfor %}
+  <!-- <tr>
+    <td class="style102">&nbsp;</td>
+    <td class="style102">&nbsp;</td>
+    <td class="style102">&nbsp;</td>
+    <td class="style102">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="style102">&nbsp;</td>
+    <td class="style102">&nbsp;</td>
+    <td class="style102">&nbsp;</td>
+    <td class="style102">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="style102">&nbsp;</td>
+    <td class="style102">&nbsp;</td>
+    <td class="style102">&nbsp;</td>
+    <td class="style102">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="style102">&nbsp;</td>
+    <td class="style102">&nbsp;</td>
+    <td class="style102">&nbsp;</td>
+    <td class="style102">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="style102">&nbsp;</td>
+    <td class="style102">&nbsp;</td>
+    <td class="style102">&nbsp;</td>
+    <td class="style102">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="style102">&nbsp;</td>
+    <td class="style102">&nbsp;</td>
+    <td class="style102">&nbsp;</td>
+    <td class="style102">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="style102">&nbsp;</td>
+    <td class="style102">&nbsp;</td>
+    <td class="style102">&nbsp;</td>
+    <td class="style102">&nbsp;</td>
+  </tr> -->
+</table>
+{% if todomore %}
+  <div class="readmore"><a class="readmore" href="{{ url_for('t') }}">More</a></div>
+{% endif %}

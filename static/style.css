@@ -1,0 +1,607 @@
+.readmore {
+	float: right;
+	text-align: right
+	font-size: small
+}
+.style2 {
+	text-align: center;
+	font-size: 58pt;
+	font-weight: bold;
+	width: 35%;
+	padding: 0px 12px 0px 12px;
+}
+.style2a {
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+	align-items: center;
+}
+.style2b {
+    display: -webkit-flex; /* Safari */
+    -webkit-flex-wrap: wrap; /* Safari 6.1+ */
+    display: flex;   
+    flex-wrap: wrap;
+    padding: 0px 12px 0px 12px;
+}
+.style3 {
+	text-align: center;
+	font-family: "Century Gothic";
+	background-color: #33CCFF;
+}
+.style5 {
+	text-align: center;
+	font-family: "Century Gothic";
+	font-size: small;
+}
+.style6 {
+	text-align: center;
+}
+.style7 {
+	border: 1px solid #000000;
+}
+.style8 {
+	border-style: solid;
+	border-width: 1px;
+	text-align: left;
+}
+.style15 {
+	text-align: left;
+}
+.style16 {
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+}
+.style17 {
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+}
+.style19 {
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	font-family: Verdana;
+	font-size: small;
+}
+.style21 {
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+}
+.style26 {
+	text-align: left;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	font-family: Verdana;
+	font-size: small;
+}
+.style32 {
+	text-align: left;
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+.style35 {
+	text-align: center;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+.style36 {
+	text-align: center;
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	background-color: #FFCC99;
+}
+
+.vertical
+{
+  width:65px;
+  height:100px;
+  vertical-align:middle;
+  -ms-transform:rotate(270deg); /* IE 9 */
+  -moz-transform:rotate(270deg); /* Firefox */
+  -webkit-transform:rotate(270deg); /* Safari and Chrome */
+  -o-transform:rotate(270deg); /* Opera */
+}
+
+.nwvertical {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-size: 12px;
+    transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    line-height: 15px;
+    height: 15px;
+    width: 15px;
+    overflow: visible;
+    white-space: nowrap;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: 1px solid black;
+}
+
+.style37 {
+	text-align: center;
+	background-color: #FFCC99;
+}
+.style38 {
+	border-style: solid;
+	border-width: 1px;
+	text-align: center;
+}
+.style39 {
+	border-style: solid;
+	border-width: 1px;
+	text-align: left;
+	background-color: #FFCC99;
+	font-family: Verdana;
+	font-size: small;
+}
+.style40 {
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	background-color: #FFCC99;
+}
+.style44 {
+	text-align: center;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	background-color: #FFCC99;
+}
+.style48 {
+	text-align: left;
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	background-color: #FFCC99;
+	font-family: Verdana;
+	font-size: small;
+}
+.style52 {
+	border-style: solid;
+	border-width: 1px;
+	text-align: left;
+	background-color: #FFFF99;
+}
+.style53 {
+	background-color: #FFFF99;
+}
+.style54 {
+	text-align: left;
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	background-color: #FFFF99;
+}
+.style55 {
+	text-align: left;
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	background-color: #FFFF99;
+}
+
+.style56 {
+	text-align: center;
+	font-family: "Century Gothic";
+	font-size: 16pt;
+	font-weight: bold;
+	color: #0070ff;
+}
+.style57 {
+	text-align: center;
+	font-family: "Century Gothic";
+	font-size: 32pt;
+	font-weight: bold;
+}
+.style58 {
+	border-style: solid;
+	border-width: 1px;
+	background-color: #FFCC99;
+	text-align: center;
+}
+.style59 {
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	background-color: #FFCC99;
+	text-align: center;
+}
+.style60 {
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	text-align: center;
+}
+.style62 {
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	text-align: center;
+}
+.style63 {
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	background-color: #FFCC99;
+	text-align: center;
+}
+.style64 {
+	text-align: center;
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+}
+
+.style65 {
+	border-style: solid;
+	border-width: 1px;
+	font-family: 'Pragati Narrow';
+	font-size: small;
+	line-height: 100%;
+	padding: 2px;
+}
+.style65a {
+	border-style: solid;
+	border-width: 1px;
+	font-family: 'Pragati Narrow';
+	font-size: small;
+	font-color: black;
+	line-height: 100%;
+	width:22px;
+	height:22px;
+	border-color:grey;
+	text-align: center;
+	display:inline;
+	padding: 2px 0px 0px 0px;
+}
+
+.style66 {
+	border-style: solid;
+	border-width: 1px;
+	text-align: center;
+	font-family: 'Pragati Narrow';
+	font-size: small;
+	line-height: 100%;
+	padding: 2px;
+}
+.style67 {
+	border-style: solid;
+	border-width: 1px;
+	background-color: #FFCC99;
+	text-align: center;
+	font-family: Verdana;
+	font-size: small;
+}
+.style68 {
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	background-color: #FFCC99;
+	text-align: center;
+	font-family: Verdana;
+	font-size: small;
+}
+.style69 {
+	text-align: center;
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	background-color: #FFCC99;
+	font-family: Verdana;
+	font-size: small;
+}
+.style70 {
+	text-align: center;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	background-color: #FFCC99;
+	font-family: Verdana;
+	font-size: small;
+}
+.style71 {
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	font-family: Verdana;
+	font-size: small;
+}
+.style72 {
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	font-family: Verdana;
+	font-size: small;
+}
+.style73 {
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	text-align: center;
+	font-family: Verdana;
+	font-size: small;
+}
+.style74 {
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	font-family: Verdana;
+	font-size: small;
+}
+.style76 {
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	text-align: center;
+	font-family: Verdana;
+	font-size: small;
+}
+.style77 {
+	text-align: center;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	font-family: Verdana;
+	font-size: small;
+}
+.style78 {
+	text-align: left;
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	font-family: Verdana;
+	font-size: small;
+}
+.style79 {
+	text-align: left;
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	font-family: Verdana;
+	font-size: small;
+}
+.style80 {
+	text-align: center;
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	font-family: Verdana;
+	font-size: small;
+}
+.style81 {
+	text-align: left;
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	font-family: Verdana;
+	font-size: small;
+}
+.style82 {
+	border-style: solid;
+	border-width: 1px;
+	text-align: left;
+	font-family: Verdana;
+	font-size: small;
+}
+.style84 {
+	width: 65px;
+	height: 100px;
+	vertical-align: middle;
+	-ms-transform: rotate(270deg); /* IE 9 */;
+	-moz-transform: rotate(270deg); /* Firefox */;
+	-webkit-transform: rotate(270deg); /* Safari and Chrome */;
+	-o-transform: rotate(270deg);
+	font-family: Verdana;
+	font-size: small;
+}
+.style85 {
+	text-align: left;
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	background-color: #FFFF99;
+	font-family: Verdana;
+	font-size: small;
+}
+.style86 {
+	border-style: solid;
+	border-width: 1px;
+	text-align: left;
+	background-color: #FFFF99;
+	font-family: Verdana;
+	font-size: small;
+}
+.style87 {
+	font-family: Verdana;
+}
+.style90 {
+	font-size: small;
+}
+.style93 {
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	font-family: Verdana;
+	font-size: small;
+}
+.style97 {
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	background-color: #FFCC99;
+	text-align: center;
+	font-family: Verdana;
+	font-size: small;
+}
+.style98 {
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	background-color: #FFCC99;
+	text-align: center;
+	font-family: Verdana;
+	font-size: small;
+}
+.style99 {
+	text-align: center;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	font-family: Verdana;
+	font-size: small;
+	width: 250px;
+}
+.style102 {
+	font-family: Verdana;
+	font-size: small;
+}
+.style103 {
+	text-align: center;
+	font-family: Verdana;
+	font-size: small;
+
+.style103a {
+	text-align: center;
+	font-family: Verdana;
+	font-size: small;
+}
+.style105 {
+	text-align: center;
+	background-color: #FFCC99;
+	font-family: Verdana;
+	font-size: small;
+}
+.style107 {
+	text-align: center;
+	font-family: Verdana;
+/*	background-color: #33CCFF; */
+	font-size: small;
+	display: inline;
+	text-align: center;
+}
+.style108 {
+	border-style: solid;
+	border-width: 1px;
+	font-family: Verdana;
+	font-size: small;
+}
+.style109 {
+	border-style: solid;
+	border-width: 1px;
+	text-align: center;
+	font-family: Verdana;
+	font-size: small;
+}
+.style110 {
+	border-style: solid;
+	border-width: 1px;
+	background-color: #FFCC99;
+	text-align: center;
+	font-family: Verdana;
+	font-size: small;
+}
+
+.style111 {
+	border-style: solid;
+}
+
+.weeklycolumn {
+    max-width: 148px;
+    height:100%
+}
+.weeklycell {
+    min-height: 12px;
+    margin-bottom: 0px;
+    width: 142px;
+}

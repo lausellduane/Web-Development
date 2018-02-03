@@ -1,0 +1,27 @@
+{% extends "amlis.html" %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Period</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+  <h2>Dropdowns</h2>
+  {% block period %}
+  <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose Period:
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      {% for item in term %}
+      <li><a href="#">{{item.year}}-{{item.month}}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endblock %}
+</div>
+  </body>
+</html>
