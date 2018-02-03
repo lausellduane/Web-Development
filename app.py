@@ -253,7 +253,7 @@ def manual_safety(group, year, month, topic):
 
 def manual_quality(group, year, month, topic):
     days = column_days(group, year, month, topic)
-    nccappa = manual_nccappa()
+    # nccappa = manual_nccappa()
     training = manual_training(group, year, month)
     #print(training)
     periodic = manual_periodic(group, year, month)
@@ -261,7 +261,7 @@ def manual_quality(group, year, month, topic):
     #print(todo)
     weekly = weeklysum(group, year, month)
     #print(weekly)
-    return {'nccapa': nccappa, 'training': training, 'periodic': periodic, 'todo': todo, 'weekly': weekly, 'days': days}
+    return {'training': training, 'periodic': periodic, 'todo': todo, 'weekly': weekly, 'days': days}
 
 def manual_delivery(group, year, month, topic):
     days = column_days(group, year, month, topic)
@@ -283,10 +283,10 @@ def manual_productivity(group, year, month, topic):
     days = column_days(group, year, month, topic)
     tracking = manual_tracking(group, year, month)
     taskIncWos = manual_taskIncWos(group, year, month)
-    maxwo = manual_maxwo()
+    # maxwo = manual_maxwo()
     #print(maxwo[0])
     weekly = weeklysum(group, year, month)
-    return {'tracking': tracking, 'taskIncWos': taskIncWos, 'maxwo': maxwo, 'weekly': weekly, 'days': days}
+    return {'tracking': tracking, 'taskIncWos': taskIncWos, 'weekly': weekly, 'days': days}
 #################### Topic Manual Function ####################
 
 #################### Dash Days Function ####################
@@ -380,8 +380,8 @@ def team_period(team, year_period, month_period):
     if len(term)==0:
         print("Period not found!!!")
     else:
-        nc_data, nc_more = nccapa()
-        wo_data, wo_more = maxwo(5)
+        # nc_data, nc_more = nccapa()
+        # wo_data, wo_more = maxwo(5)
         todo_s = column_todo(term['team'], term['year'], term['month'], topic="s")
         todo_q = column_todo(term['team'], term['year'], term['month'], topic="q")
         todo_d = column_todo(term['team'], term['year'], term['month'], topic="d")
@@ -396,7 +396,7 @@ def team_period(team, year_period, month_period):
         manual_data = manual_bundle(term['team'], term['year'], term['month'])
         #print(test_data)
         #return render_template('todos.html', data=term)
-        return render_template('amlis/dash.html', term=[term], team=team, ncdata=nc_data, ncmore = nc_more, wodata = wo_data, womore = wo_more, todos=todo_s, todoq=todo_q, todod=todo_d, todoi=todo_i, todop=todo_p, weekdata=week_data, daydata=day_data, manualdata = manual_data, attendata=attend_data, user=g.user, referrer = referrer_url)#, coltododata=col_todo_data, referrer = referrer_url, periods = all_periods)
+        return render_template('amlis/dash.html', term=[term], team=team, todos=todo_s, todoq=todo_q, todod=todo_d, todoi=todo_i, todop=todo_p, weekdata=week_data, daydata=day_data, manualdata = manual_data, attendata=attend_data)#, coltododata=col_todo_data, referrer = referrer_url, periods = all_periods)
 
 #################### Initializers Functions ####################
 def init_days(team, year_period, month_period):
@@ -629,6 +629,501 @@ def init_p(team, year_period, month_period):
     if not update_taskIncWos_ismCC.acknowledged:
         print("Error upserting taskIncWos ISM Changes - CLOSED/CANCELLED :", topic)
 #################### Initializers Functions ####################
+
+####### This section includes the API code for Attendance ###########
+class AttendList(Resource):
+    def get(self, team, year_period, month_period):
+        collection = db.attendance
+        form_cursor = collection.find({'TEAM': team, 'YEAR': year_period, 'MONTH': month_period})
+        if form_cursor.count() > 0:
+            form_data = list(form_cursor)
+            # print(form_data)
+            for item in form_data:
+                for key, value in item.items():
+                    if type(value)==date:
+                        item[key]=value.strftime("%m/%d/%Y")
+                    elif type(value)==ObjectId:
+                        item[key]=str(value)
+                    elif type(value)==time:
+                        item[key]=value.strftime("%H:%M:%S")
+                    elif type(value)==datetime:
+                        item[key]=value.strftime("%m/%d/%Y")
+            return form_data
+        else:
+            return []
+
+api.add_resource(AttendList, '/api/attend/<string:team>/<string:year_period>/<string:month_period>')
+
+class AttendItem(Resource):
+    def put(self, team, year_period, month_period):
+        """This function perform an update on an existing record"""
+        collection = db.attendance
+        form_data = request.form.to_dict()
+        if '_id' in form_data:
+            id = form_data.pop('_id')
+            print("===================")
+            print("From Attendance Put Id:",id)
+            print("===================")
+            print("Row will be updated: ", id)
+#            try:
+            update_record = {'$set':form_data}
+            updated_row = collection.update_one({'_id': ObjectId(id) }, update_record)
+            if updated_row.matched_count == 1:
+                print("Row updated succesfully!")
+            else:
+                print("There was error #1 in your update!")
+                print(updated_row.raw_result)
+#            except:
+#                print("There was error #2 in your update!")
+        else:
+            print("Not ObjectId received!")
+        return
+
+    def delete(self, team, year_period, month_period):
+        """Delete document"""
+        collection = db.attendance
+        form_data = request.form.to_dict()
+        if '_id' in form_data:
+            # try:
+            id = form_data.pop('_id')
+            print("===================")
+            print("From Attendance Delete Id:",id)
+            print("===================")
+            deleted_row = collection.delete_one({'_id': ObjectId(id)})
+            #     if delete_row.delete_count != 1:
+            #         print("Warning: Expected to delete 1 row, but deleted these many instead: ", delete_row.delete_count)
+            #         print(delete_row.raw_result)
+            # except:
+            #     print("There was error #1 in your delete!")
+            #     print(deleted_row.raw_result)
+        else:
+            print("Not ObjectId received!")
+        return
+
+    def post(self, team, year_period, month_period):
+        """Creates a new document"""
+        collection = db.attendance
+        form_data = request.form.to_dict()
+        # print("===========================")
+        # print("post: ", form_data)
+        # print("===========================")
+        form_data['TEAM'] = team
+        form_data['YEAR'] = year_period
+        form_data['MONTH'] = month_period
+        # print("===========================")
+        # print("post: ", form_data)
+        # print("===========================")
+#        try:
+        insert_row = collection.insert_one(form_data)
+        if insert_row.inserted_id:
+            print(insert_row.inserted_id)
+            print("===================")
+            print("From Attendance Post Id:", insert_row.inserted_id)
+            print("===================")
+        else:
+            print("There was error #1 in your insert!")
+            print(insert_row.raw_result)
+#        except:
+#            print("There was error #2 in your insert!")
+        return
+
+
+api.add_resource(AttendItem, '/api/attend/<string:team>/<string:year_period>/<string:month_period>')
+
+#####################################
+
+####### This section includes the API code for ToDo ###########
+class TodoList(Resource):
+    def get(self, team, year_period, month_period, topic):
+        collection = db.todos
+        form_cursor = collection.find({'TEAM': team, 'YEAR': year_period, 'MONTH': month_period, 'TOPIC': topic})
+        if form_cursor.count() > 0:
+            form_data = list(form_cursor)
+            # print(form_data)
+            for item in form_data:
+                for key, value in item.items():
+                    if type(value)==date:
+                        item[key]=value.strftime("%m/%d/%Y")
+                    elif type(value)==ObjectId:
+                        item[key]=str(value)
+                    elif type(value)==time:
+                        item[key]=value.strftime("%H:%M:%S")
+                    elif type(value)==datetime:
+                        item[key]=value.strftime("%m/%d/%Y")
+            return form_data
+        else:
+            return []
+#            return { data: [], itemsCount: 0 }
+
+api.add_resource(TodoList, '/api/todos/<string:team>/<string:year_period>/<string:month_period>/<string:topic>')
+
+class TodoItem(Resource):
+    def put(self, team, year_period, month_period, topic):
+        """This function perform an update on an existing record"""
+        collection = db.todos
+        form_data = request.form.to_dict()
+        print("===================")
+        print("From Todo put: ", form_data)
+        print("===================")
+        if '_id' in form_data:
+            id = form_data.pop('_id')
+            print("===================")
+            print("From Todo Put Id:",id)
+            print("===================")
+            print("Row will be updated: ", id)
+#            try:
+            update_record = {'$set':form_data}
+            updated_row = collection.update_one({'_id': ObjectId(id) }, update_record)
+            if updated_row.matched_count == 1:
+                print("Row updated succesfully!")
+            else:
+                print("There was error #1 in your update!")
+                print(updated_row.raw_result)
+#            except:
+#                print("There was error #2 in your update!")
+        else:
+            print("Not ObjectId received!")
+        return
+
+    def delete(self, team, year_period, month_period, topic):
+        """Delete document"""
+        collection = db.todos
+        form_data = request.form.to_dict()
+        if '_id' in form_data:
+            # try:
+            id = form_data.pop('_id')
+            print("===================")
+            print("From Todo Delete Id:",id)
+            print("===================")
+            deleted_row = collection.delete_one({'_id': ObjectId(id)})
+            #     if delete_row.delete_count != 1:
+            #         print("Warning: Expected to delete 1 row, but deleted these many instead: ", delete_row.delete_count)
+            #         print(delete_row.raw_result)
+            # except:
+            #     print("There was error #1 in your delete!")
+            #     print(deleted_row.raw_result)
+        else:
+            print("Not ObjectId received!")
+        return
+
+    def post(self, team, year_period, month_period, topic):
+        """Creates a new document"""
+        collection = db.todos
+        form_data = request.form.to_dict()
+        # print("===========================")
+        # print("post: ", form_data)
+        # print("===========================")
+        form_data['TEAM'] = team
+        form_data['YEAR'] = year_period
+        form_data['MONTH'] = month_period
+        form_data['TOPIC'] = topic
+        # print("===========================")
+        # print("post: ", form_data)
+        # print("===========================")
+#        try:
+        insert_row = collection.insert_one(form_data)
+        if insert_row.inserted_id:
+            print(insert_row.inserted_id)
+            print("===================")
+            print("From Todo Post Id:", insert_row.inserted_id)
+            print("===================")
+        else:
+            print("There was error #1 in your insert!")
+            print(insert_row.raw_result)
+#        except:
+#            print("There was error #2 in your insert!")
+        print("I'm returning")
+        return
+
+
+api.add_resource(TodoItem, '/api/todos/<string:team>/<string:year_period>/<string:month_period>/<string:topic>')
+
+#####################################
+
+####### This section includes the API code for Days ###########
+
+class DaysList(Resource):
+    def get(self, team, year_period, month_period, topic):
+        collection = db.days
+        form_cursor = collection.find({'TEAM': team, 'YEAR': year_period, 'MONTH': month_period, 'TOPIC': topic})
+        if form_cursor.count() > 0:
+            form_data = list(form_cursor)
+            print("GET form data: ", form_data)
+            for item in form_data:
+                for key, value in item.items():
+                    if type(value)==date:
+                        item[key]=value.strftime("%m/%d/%Y")
+                    elif type(value)==ObjectId:
+                        item[key]=str(value)
+                    elif type(value)==time:
+                        item[key]=value.strftime("%H:%M:%S")
+                    elif type(value)==datetime:
+                        item[key]=value.strftime("%m/%d/%Y")
+            return form_data
+        else:
+            return []
+
+api.add_resource(DaysList, '/api/days/<string:team>/<string:year_period>/<string:month_period>/<string:topic>')
+
+class DaysItem(Resource):
+    def put(self, team, year_period, month_period, topic, day, value):
+        """This function perform an update on an existing record"""
+        collection = db.days
+        form_cursor = collection.find({'TEAM': team, 'YEAR': year_period, 'MONTH': month_period, 'TOPIC': topic, 'DAY': int(day)})
+        print("Put form data cursor: ", form_cursor)
+        form_data = collection.find_one({'TEAM': team, 'YEAR': year_period, 'MONTH': month_period, 'TOPIC': topic, 'DAY': int(day)})
+        print("Put form data: ", form_data)
+        # form_data = list(form_cursor)
+        # print("Put form data list: ", form_data)
+        # form_data = request.form.to_dict()
+        # print("Put form data form: ", form_data)
+        if '_id' in form_data:
+        #if '_id' in form_cursor:
+            id = form_data.pop('_id')
+            print("Row will be updated: ", id)
+            form_data['VALUE'] = value
+            update_record = {'$set':form_data}
+            updated_row = collection.update_one({'_id': ObjectId(id) }, update_record)
+            if updated_row.matched_count == 1:
+                print("Row updated succesfully!")
+            else:
+                print("There was error #1 in your update!")
+                print(updated_row.raw_result)
+        else:
+            print("Not ObjectId received!")
+        return
+
+api.add_resource(DaysItem, '/api/days/<string:team>/<string:year_period>/<string:month_period>/<string:topic>/<string:day>/<string:value>')
+#####################################
+
+####### This section includes the API code for Manual ###########
+class ManualList(Resource):
+    def get(self, team, year_period, month_period, topic, table):
+        collection = db.manual
+        form_cursor = collection.find({'TEAM': team, 'YEAR': year_period, 'MONTH': month_period, 'TOPIC': topic, 'TABLE': table})
+        if form_cursor.count() > 0:
+            form_data = list(form_cursor)
+            # print(form_data)
+            for item in form_data:
+                for key, value in item.items():
+                    if type(value)==date:
+                        item[key]=value.strftime("%m/%d/%Y")
+                    elif type(value)==ObjectId:
+                        item[key]=str(value)
+                    elif type(value)==time:
+                        item[key]=value.strftime("%H:%M:%S")
+                    elif type(value)==datetime:
+                        item[key]=value.strftime("%m/%d/%Y")
+            return form_data
+        else:
+            return []
+
+api.add_resource(ManualList, '/api/manual/<string:team>/<string:year_period>/<string:month_period>/<string:topic>/<string:table>')
+
+class ManualItem(Resource):
+    def put(self, team, year_period, month_period, topic, table):
+        """This function perform an update on an existing record"""
+        collection = db.manual
+        form_data = request.form.to_dict()
+        if '_id' in form_data:
+            id = form_data.pop('_id')
+            # print("===================")
+            # print("From PUT Id:",id)
+            # print("===================")
+            print("Row will be updated: ", id)
+#            try:
+            update_record = {'$set':form_data}
+            # print("update_record =", update_record)
+            updated_row = collection.update_one({'_id': ObjectId(id) }, update_record)
+            # print("update_row =", updated_row)
+            if updated_row.matched_count == 1:
+                print("Row updated succesfully!")
+            else:
+                print("There was error #1 in your update!")
+                print(updated_row.raw_result)
+#            except:
+#                print("There was error #2 in your update!")
+        else:
+            print("Not ObjectId received!")
+        return
+
+    def delete(self, team, year_period, month_period, topic, table):
+        """Delete document"""
+        collection = db.manual
+        form_data = request.form.to_dict()
+        print("===========================")
+        print("post-delete: ", form_data)
+        print("===========================")
+        if '_id' in form_data:
+#            try:
+            id = form_data.pop('_id')
+            print("===================")
+            print("From Delete Id:",id)
+            print("===================")
+            deleted_row = collection.delete_one({'_id': ObjectId(id)})
+            if delete_row.delete_count != 1:
+                print("Warning: Expected to delete 1 row, but deleted these many instead: ", delete_row.delete_count)
+                print(delete_row.raw_result)
+            #except:
+            print("There was error #1 in your delete!")
+            print(deleted_row.raw_result)
+        else:
+            print("Not ObjectId received!")
+        return
+
+    def post(self, team, year_period, month_period, topic, table):
+        """Creates a new document"""
+        collection = db.manual
+        form_data = request.form.to_dict()
+        # print("===========================")
+        # print("post: ", form_data)
+        # print("===========================")
+        # list_data = list(form_data)
+        form_data['TEAM'] = team
+        form_data['YEAR'] = year_period
+        form_data['MONTH'] = month_period
+        form_data['TOPIC'] = topic
+        form_data['TABLE'] = table
+        # period = ('TEAM': team , 'YEAR': year_period, 'MONTH': month_period, 'TOPIC': topic, 'TABLE':table )
+        # list_data.insert(0, period)
+        # form_data.append('TEAM':team, 'YEAR': year_period, 'MONTH': month_period, 'TOPIC':topic, 'TABLE':table)
+        # print("===========================")
+        # print("Manual post: ", form_data)
+        # print("===========================")
+        # list_data = list(form_data)
+        # print("===========================")
+        # print("post: ", list_data)
+        # print("===========================")
+#        try:
+        insert_row = collection.insert_one(form_data)
+        if insert_row.inserted_id:
+            # print(self.get(insert_row.inserted_id))
+            print(insert_row.inserted_id)
+            # print("===================")
+            # print("From POST Id:", insert_row.inserted_id)
+            # print("===================")
+        else:
+            print("There was error #1 in your insert!")
+            print(insert_row.raw_result)
+#        except:
+#            print("There was error #2 in your insert!")
+        return
+
+
+api.add_resource(ManualItem, '/api/manual/<string:team>/<string:year_period>/<string:month_period>/<string:topic>/<string:table>')
+
+#####################################
+
+####### This section includes the API code for Weekly ###########
+class WeekList(Resource):
+    def get(self, team, year_period, month_period, week, hi_lo):
+        collection = db.weeklysum
+        form_cursor = collection.find({'TEAM': team, 'YEAR': year_period, 'MONTH': month_period, "WEEK": week, "HI_LO": hi_lo})
+        if form_cursor.count() > 0:
+            form_data = list(form_cursor)
+            # print("===================")
+            # print("From Weekly form_data get data:", form_data)
+            # print("===================")
+            for item in form_data:
+                for key, value in item.items():
+                    if type(value)==date:
+                        item[key]=value.strftime("%m/%d/%Y")
+                    elif type(value)==ObjectId:
+                        item[key]=str(value)
+                    elif type(value)==time:
+                        item[key]=value.strftime("%H:%M:%S")
+                    elif type(value)==datetime:
+                        item[key]=value.strftime("%m/%d/%Y")
+            return form_data
+        else:
+            return []
+
+api.add_resource(WeekList, '/api/week/<string:team>/<string:year_period>/<string:month_period>/<string:week>/<string:hi_lo>')
+
+class WeekItem(Resource):
+    def put(self, team, year_period, month_period, week, hi_lo):
+        """This function perform an update on an existing record"""
+        collection = db.weeklysum
+        form_data = request.form.to_dict()
+        if '_id' in form_data:
+            id = form_data.pop('_id')
+            print("===================")
+            print("From Weekly PUT Id:",id)
+            print("===================")
+            print("Row will be updated: ", id)
+#            try:
+            update_record = {'$set':form_data}
+            # print("update_record =", update_record)
+            updated_row = collection.update_one({'_id': ObjectId(id) }, update_record)
+            # print("update_row =", updated_row)
+            if updated_row.matched_count == 1:
+                print("Row updated succesfully!")
+            else:
+                print("There was error #1 in your update!")
+                print(updated_row.raw_result)
+#            except:
+#                print("There was error #2 in your update!")
+        else:
+            print("Not ObjectId received!")
+        return
+
+    def delete(self, team, year_period, month_period, week, hi_lo):
+        """Delete document"""
+        collection = db.weeklysum
+        form_data = request.form.to_dict()
+        print("===========================")
+        print("Weekly delete: ", form_data)
+        print("===========================")
+        if '_id' in form_data:
+    #            try:
+            id = form_data.pop('_id')
+            print("===================")
+            print("From Weekly Delete Id:", id)
+            print("===================")
+            deleted_row = collection.delete_one({'_id': ObjectId(id)})
+            # if delete_row.delete_count != 1:
+            #     print("Warning: Expected to delete 1 row, but deleted these many instead: ", delete_row.delete_count)
+            #     print(delete_row.raw_result)
+            # #except:
+            # print("There was error #1 in your delete!")
+            # print(deleted_row.raw_result)
+        else:
+            print("Not ObjectId received!")
+        return
+
+    def post(self, team, year_period, month_period, week, hi_lo):
+        """Creates a new document"""
+        collection = db.weeklysum
+        form_data = request.form.to_dict()
+        print("===========================")
+        print("post: ", form_data)
+        print("===========================")
+        # list_data = list(form_data)
+        form_data['TEAM'] = team
+        form_data['YEAR'] = year_period
+        form_data['MONTH'] = month_period
+        form_data['WEEK'] = week
+        form_data['HI_LO'] = hi_lo
+        print("===========================")
+        print("post: ", form_data)
+        print("===========================")
+        insert_row = collection.insert_one(form_data)
+        if insert_row.inserted_id:
+            # print(self.get(insert_row.inserted_id))
+            print(insert_row.inserted_id)
+            print("===================")
+            print("From Weekly POST Id:", insert_row.inserted_id)
+            print("===================")
+        else:
+            print("There was error #1 in your insert!")
+            print(insert_row.raw_result)
+    #        except:
+    #            print("There was error #2 in your insert!")
+        return
+
+api.add_resource(WeekItem, '/api/week/<string:team>/<string:year_period>/<string:month_period>/<string:week>/<string:hi_lo>')
+
+
 @app.after_request
 def add_header(r):
     """
@@ -640,6 +1135,13 @@ def add_header(r):
     r.headers["Expires"] = "0"
     r.headers['Cache-Control'] = 'public, max-age=0'
     return r
+
+@app.template_filter('shortdate')
+def filter_datetime2shortdate(mydate):
+#    native = mydate.replace(tzinfo=None)
+    format='%m-%d-%y'
+    return mydate.strftime(format)
+
 
 if __name__ == "__main__":
     app.secret_key = 'mysecret'
