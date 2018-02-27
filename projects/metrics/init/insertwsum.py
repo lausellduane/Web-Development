@@ -31,7 +31,7 @@ new_ws = [{
     "MONTH": "8",
     "WEEK": "one", #datetime.strptime("2017-08-10", "%Y-%m-%d").isocalendar(),
     "HI_LO": "zero",
-    "NOTE": "Amgen ran out of diesel"
+    "NOTE": "Jose ran out of diesel"
 },
 {
     "TEAM": "amlis",
@@ -63,7 +63,7 @@ new_ws = [{
     "MONTH": "8",
     "WEEK": "one",
     "HI_LO": "zero",
-    "NOTE": "Amgen will go back to JDE ERP system"
+    "NOTE": "Supply Chain will go back to DJE execution system"
 },
 {
     "TEAM": "amlis",
